@@ -25,7 +25,7 @@ zinit light-mode for \
     zinit-zsh/z-a-bin-gem-node
 
 # powerlevel10k theme
-zinit ice depth=1; zinit light romkatv/powerlevel10k
+zinit light-mode depth=1 for romkatv/powerlevel10k
 
 # adds keyword _evalcache to cache output of configuration commands
 # _evalcache_clear clears this cache
@@ -46,6 +46,9 @@ zinit snippet OMZ::plugins/extract
 
 # adds a function cpv that uses rsync to copy
 zinit snippet OMZ::plugins/cp
+
+# Installs vim-plug
+zinit as"null" atpull"!mkdir -p $HOME/.local/share/nvim/site/autoload" cp"plug.vim -> $HOME/.local/share/nvim/site/autoload/plug.vim" for junegunn/vim-plug
 
 # adds integration with asdf to zsh
 zinit ice pick'asdf.sh'
