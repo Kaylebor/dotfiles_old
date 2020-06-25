@@ -46,3 +46,7 @@ zinit snippet OMZ::plugins/extract
 
 # adds a function cpv that uses rsync to copy
 zinit snippet OMZ::plugins/cp
+
+# adds integration with asdf to zsh
+zinit ice pick'asdf.sh'
+zinit light asdf-vm/asdf
