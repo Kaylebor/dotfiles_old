@@ -5,5 +5,7 @@
 !.zsh_scripts/*.zsh
 # Whitelist .zshrc
 !.zshrc
+# Whitelist .p10k.zsh
+!.p10k.zsh
 # Whitelist .gitignore
 !.gitignore
