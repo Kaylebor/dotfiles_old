@@ -18,8 +18,5 @@ export PAGER="most"
 # Sets aliases
 . "$HOME/.zsh_scripts/aliases.zsh"
 
-# Loads docker-denodo-web-services scripts to PATH
-export PATH=$HOME/workspace/docker-denodo-web-services:$PATH
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
