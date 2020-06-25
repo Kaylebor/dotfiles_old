@@ -1,5 +1,9 @@
 # Created by newuser for 5.8
 
+# zsh history settings
+export SAVEHIST=1000
+export HISTFILE=~/.zsh_history
+
 # ZSH completion styles
 . "$HOME/.zsh_scripts/zshcomp.zsh"
 
