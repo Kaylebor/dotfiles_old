@@ -9,3 +9,5 @@
 !.p10k.zsh
 # Whitelist .gitignore
 !.gitignore
+# Whitelist setup.sh
+!setup.sh
