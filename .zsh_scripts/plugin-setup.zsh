@@ -54,3 +54,9 @@ zinit as"null" atpull"!mkdir -p $vimplugpath" cp"plug.vim -> $vimplugpath/plug.v
 # adds integration with asdf to zsh
 zinit ice pick'asdf.sh'
 zinit light asdf-vm/asdf
+
+# adds direnv plugin: changes environment variables on folder change
+zinit as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' \
+        atpull'%atclone' pick"direnv" src"zhook.zsh" for \
+                direnv/direnv
+
