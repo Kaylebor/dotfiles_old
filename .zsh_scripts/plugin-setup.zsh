@@ -67,6 +67,10 @@ zinit ice as"program" atclone'perl Makefile.PL PREFIX=$ZPFX' \
         atpull'%atclone' make'install' pick"$ZPFX/bin/git-cal"
 zinit light k4rthik/git-cal
 
+# Gitignore plugin – commands gii and gi
+zinit ice wait"2" lucid
+zinit load voronkovich/gitignore.plugin.zsh
+
 # adds integration with asdf to zsh
 zinit ice pick'asdf.sh'
 zinit light asdf-vm/asdf
