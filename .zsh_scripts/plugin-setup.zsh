@@ -48,7 +48,8 @@ zinit snippet OMZ::plugins/extract
 zinit snippet OMZ::plugins/cp
 
 # Installs vim-plug
-zinit as"null" atpull"!mkdir -p $HOME/.local/share/nvim/site/autoload" cp"plug.vim -> $HOME/.local/share/nvim/site/autoload/plug.vim" for junegunn/vim-plug
+vimplugpath="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload"
+zinit as"null" atpull"!mkdir -p $vimplugpath" cp"plug.vim -> $vimplugpath/plug.vim" for junegunn/vim-plug
 
 # adds integration with asdf to zsh
 zinit ice pick'asdf.sh'
