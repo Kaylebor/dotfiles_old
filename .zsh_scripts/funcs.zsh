@@ -27,6 +27,7 @@ eclipse.jdt.start() {
         fi
         if [[ ! -z $REBUILD_ECLIPSE_JDT ]]; then
             cd $ECLIPSE_JDT_PATH
+            git pull
 
             [[ -z $ECLIPSE_WORKSPACE ]] && ECLIPSE_WORKSPACE=$HOME/eclipse-workspace
             [[ -d $ECLIPSE_WORKSPACE ]] && mkdir -p $ECLIPSE_WORKSPACE
