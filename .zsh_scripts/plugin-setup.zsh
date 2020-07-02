@@ -1,3 +1,4 @@
+#!/bin/zsh
 # Requires zinit: https://github.com/zdharma/zinit
 
 ### Added by Zinit's installer
@@ -51,18 +52,6 @@ zinit snippet OMZ::plugins/cp
 vimplugpath="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload"
 zinit as"null" atpull"!mkdir -p $vimplugpath" cp"plug.vim -> $vimplugpath/plug.vim" for junegunn/vim-plug
 
-# sharkpd/fd
-zinit ice as"command" from"gh-r" mv"fd* -> fd" pick"fd/fd"
-zinit light sharkdp/fd
-
-# sharkdp/bat
-zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
-zinit light sharkdp/bat
-
-# ogham/exa, replacement for ls
-zinit ice wait"2" lucid from"gh-r" as"program" mv"exa* -> exa"
-zinit light ogham/exa
-
 zinit ice as"program" atclone'perl Makefile.PL PREFIX=$ZPFX' \
         atpull'%atclone' make'install' pick"$ZPFX/bin/git-cal"
 zinit light k4rthik/git-cal
@@ -74,9 +63,3 @@ zinit load voronkovich/gitignore.plugin.zsh
 # adds integration with asdf to zsh
 zinit ice pick'asdf.sh'
 zinit light asdf-vm/asdf
-
-# adds direnv plugin: changes environment variables on folder change
-zinit as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' \
-        atpull'%atclone' pick"direnv" src"zhook.zsh" for \
-                direnv/direnv
-

@@ -1,3 +1,4 @@
+#!/bin/zsh
 case "${TERM}" in
   cons25*|linux) # plain BSD/Linux console
     bindkey '\e[H'    beginning-of-line   # home 
