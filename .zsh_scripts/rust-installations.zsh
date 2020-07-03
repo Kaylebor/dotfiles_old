@@ -12,4 +12,7 @@ which fd > /dev/null # sharkdp/fd
 which exa > /dev/null # ogham/exa
 [[ $? != 0 ]] && cargo install exa
 
+which hexyl > /dev/null # sharkdp/hexyl
+[[ $? != 0 ]] && cargo install hexyl
+
 asdf reshim rust
