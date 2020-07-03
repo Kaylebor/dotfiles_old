@@ -24,6 +24,8 @@ export HISTFILE=~/.zsh_history
 
 # Uses most for man pages
 export PAGER=most
+# bat does not like using other pagers than less
+export BAT_PAGER=less
 
 # Fixes keybindings; allows to use CTRL+Left/Right to skip words
 . $HOME/.zsh_scripts/keybindings-fix.zsh
