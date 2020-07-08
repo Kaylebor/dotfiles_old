@@ -1,13 +1,1 @@
-# Ignore everything
-*
-# Whitelist scripts directory
-!.zsh_scripts
-!.zsh_scripts/*.zsh
-# Whitelist .zshrc
-!.zshrc
-# Whitelist .p10k.zsh
-!.p10k.zsh
-# Whitelist .gitignore
-!.gitignore
-# Whitelist setup.sh
-!setup.sh
+jdt.log
