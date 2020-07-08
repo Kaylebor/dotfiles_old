@@ -22,10 +22,8 @@ export HISTFILE=~/.zsh_history
 # Installs Go utilities
 . $HOME/.zsh_scripts/golang-installations.zsh
 
-# Uses most for man pages
-export PAGER=most
-# bat does not like using other pagers than less
-export BAT_PAGER=less
+# Uses bat for man pages
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Fixes keybindings; allows to use CTRL+Left/Right to skip words
 . $HOME/.zsh_scripts/keybindings-fix.zsh
