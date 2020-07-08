@@ -1,0 +1,5 @@
+[core]
+    editor = nvim
+    eol = lf
+    autocrlf = input
+    pager = bat -l gitconfig
