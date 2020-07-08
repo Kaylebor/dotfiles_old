@@ -1,6 +1,6 @@
 #!/bin/zsh
-# enables color in ls
-alias ls='ls --color=auto'
+# replaces ls with exa
+alias ls='exa'
 
 # alias git to hub
 eval "$(hub alias -s)"
