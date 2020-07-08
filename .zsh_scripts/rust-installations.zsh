@@ -1,18 +1,13 @@
 #!/bin/zsh
 
-which rg > /dev/null
-[[ $? != 0 ]] && cargo install ripgrep
+[[ ! -f $(which bat) ]] && cargo install --locked bat # sharkdp/bat
 
-which bat > /dev/null # sharkdp/bat
-[[ $? != 0 ]] && cargo install --locked bat
+[[ ! -f $(which fd) ]] && cargo install fd-find # sharkdp/fd
 
-which fd > /dev/null # sharkdp/fd
-[[ $? != 0 ]] && cargo install fd-find
+[[ ! -f $(which exa) ]] && cargo install exa # ogham/exa
 
-which exa > /dev/null # ogham/exa
-[[ $? != 0 ]] && cargo install exa
+[[ ! -f $(which hexyl) ]] && cargo install hexyl # sharkdp/hexyl
 
-which hexyl > /dev/null # sharkdp/hexyl
-[[ $? != 0 ]] && cargo install hexyl
+[[ ! -f $(which rg) ]] && cargo install --git https://github.com/BurntSushi/ripgrep ripgrep --features 'pcre2'
 
 asdf reshim rust
