@@ -32,8 +32,14 @@ zinit light-mode depth=1 for romkatv/powerlevel10k
 # _evalcache_clear clears this cache
 zinit load mroth/evalcache
 
-zinit light zsh-users/zsh-autosuggestions
-zinit light zdharma/fast-syntax-highlighting
+zinit wait lucid light-mode for \
+    atinit"zicompinit; zicdreplay" \
+        zdharma/fast-syntax-highlighting \
+    atload"_zsh_autosuggest_start" \
+        zsh-users/zsh-autosuggestions \
+    blockf atpull'zinit creinstall -q .' \
+        zsh-users/zsh-completions
+
 # Plugin history-search-multi-word loaded with investigating.
 zinit load zdharma/history-search-multi-word
 # man page generator for plugins
