@@ -63,7 +63,9 @@ zinit pick'asdf.sh' for light-mode @asdf-vm/asdf
 
 # github/hub
 zinit from'gh-r' as'program' bpick'*linux-amd64*' pick'*/bin/hub' atclone'rm hub-linux-*/share/man/man1/*.txt' for @github/hub
-eval "$(hub alias -s)"
+
+# zaquestion/lab
+zinit from'gh-r' as'program' bpick'*linux_amd64*' pick'lab' for zaquestion/lab
 
 # jarun/googler
 zinit from'gh-r' as'program' bpick'*x86_64*' pick'*/bin/googler' for jarun/googler
