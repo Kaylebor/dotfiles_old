@@ -69,3 +69,5 @@ zinit from'gh-r' as'program' bpick'*linux_amd64*' pick'lab' for zaquestion/lab
 
 # jarun/googler
 zinit from'gh-r' as'program' bpick'*x86_64*' pick'*/bin/googler' for jarun/googler
+
+zinit cdreplay -q # <- execute compdefs provided by rest of plugins
