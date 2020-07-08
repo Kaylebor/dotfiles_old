@@ -52,14 +52,15 @@ zinit snippet OMZ::plugins/cp
 vimplugpath="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload"
 zinit as"null" atpull"!mkdir -p $vimplugpath" cp"plug.vim -> $vimplugpath/plug.vim" for junegunn/vim-plug
 
-zinit ice as"program" atclone'perl Makefile.PL PREFIX=$ZPFX' \
-        atpull'%atclone' make'install' pick"$ZPFX/bin/git-cal"
-zinit light k4rthik/git-cal
+zinit as"program" atclone'perl Makefile.PL PREFIX=$ZPFX' \
+        atpull'%atclone' make'install' pick"$ZPFX/bin/git-cal" for light-mode k4rthik/git-cal
 
 # Gitignore plugin – commands gii and gi
-zinit ice wait"2" lucid
-zinit load voronkovich/gitignore.plugin.zsh
+zinit wait"2" lucid for voronkovich/gitignore.plugin.zsh
 
 # adds integration with asdf to zsh
-zinit ice pick'asdf.sh'
-zinit light asdf-vm/asdf
+zinit pick'asdf.sh' for light-mode @asdf-vm/asdf
+
+# github/hub
+zinit from'gh-r' as'program' bpick'*linux-amd64*' pick'*/bin/hub' for  @github/hub
+eval "$(hub alias -s)"
