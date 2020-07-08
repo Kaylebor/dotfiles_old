@@ -22,7 +22,7 @@ asdf_update_latest() {
 }
 
 if [[ -f $(which asdf) ]]; then
-    for plugin in rust golang
+    for plugin in rust golang maven
     do
         asdf_install_latest $plugin
     done
