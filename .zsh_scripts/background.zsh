@@ -30,8 +30,7 @@ if [[ ! -z ENABLE_JELLYFIN ]]; then
             [[ -z $(docker volume ls | rg jellyfin-config) ]] && docker volume create jellyfin-config
             [[ -z $(docker volume ls | rg jellyfin-cache) ]] && docker volume create jellyfin-cache
             docker run -d \
-                -p 8096:8096 \
-                -p 8920:8920 \
+                --net=host \
                 -e NVIDIA_DRIVER_CAPABILITIES=all \
                 -e NVIDIA_VISIBLE_DEVICES=all \
                 --runtime=nvidia \
@@ -41,7 +40,7 @@ if [[ ! -z ENABLE_JELLYFIN ]]; then
                 -v /home/media:/media \
                 --user 1000:1000 \
                 --restart unless-stopped \
-                jellyfin/jellyfin:latest 2>&1 > /dev/null
+                jellyfin/jellyfin:nightly 2>&1 > /dev/null
         else
             docker start $prev_container 2>&1 > /dev/null
         fi
