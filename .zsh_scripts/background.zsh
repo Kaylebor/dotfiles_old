@@ -1,19 +1,17 @@
 #!/bin/zsh
 
-check_not_running() {
-    unset not_running
-    if [[ -f $(which docker) && \
-        ! -z $(docker image ls | rg $1) && \
-        -z $(docker container ps -f 'status=running' -f 'ancestor=$1' | rg --invert-match IMAGE | tr -s ' ' | cut -d ' ' -f 2) ]]; then
-        not_running=1
-        prev_container=$(docker container ps -a -f "ancestor=$1" | rg --invert-match IMAGE | tail -n1 | tr -s ' ' | cut -d ' ' -f 1)
-    fi
+check-running-containers() {
+    echo $(docker container ps -f 'status=running' -f "ancestor=$1" | tail -n +2 | wc -l)
 }
 
-if [[ ! -z ENABLE_JDT ]]; then
+check-previous-container-name() {
+    echo $(docker container ps -a -f "ancestor=$1" | rg --invert-match IMAGE | tail -n1 | tr -s ' ' | cut -d ' ' -f 1)
+}
+
+if [[ $ENABLE_JDT -eq 1 ]]; then
     jdt_container="kaylebor/eclipse.jdt.ls"
-    check_not_running $jdt_container
-    if [[ ! -z not_running  ]]; then
+    if [[ $(check-running-containers $jdt_container) -ge 1  ]]; then
+        prev_container=$(check-previous-container-name $jdt_container)
         if [[ -z $prev_container ]]; then
             docker run -d --net=host $jdt_container 2>&1 > /dev/null
         else
@@ -22,10 +20,10 @@ if [[ ! -z ENABLE_JDT ]]; then
     fi
 fi
 
-if [[ ! -z ENABLE_JELLYFIN ]]; then
+if [[ $ENABLE_JELLYFIN -eq 1 ]]; then
     jellyfin_container="jellyfin/jellyfin"
-    check_not_running $jellyfin_container
-    if [[ ! -z not_running  ]]; then
+    if [[ $(check-running-containers $jdt_container) -ge 1  ]]; then
+        prev_container=$(check-previous-container-name $jdt_container)
         if [[ -z $prev_container ]]; then
             [[ -z $(docker volume ls | rg jellyfin-config) ]] && docker volume create jellyfin-config
             [[ -z $(docker volume ls | rg jellyfin-cache) ]] && docker volume create jellyfin-cache

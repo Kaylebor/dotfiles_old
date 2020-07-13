@@ -33,36 +33,34 @@ zinit light-mode depth=1 for romkatv/powerlevel10k
 zinit load mroth/evalcache
 
 zinit wait lucid light-mode for \
-    atinit"zicompinit; zicdreplay" \
-        zdharma/fast-syntax-highlighting \
-    atload"_zsh_autosuggest_start" \
-        zsh-users/zsh-autosuggestions \
-    blockf atpull'zinit creinstall -q .' \
-        zsh-users/zsh-completions
+    atinit"zicompinit; zicdreplay" zdharma/fast-syntax-highlighting \
+    atload"_zsh_autosuggest_start" zsh-users/zsh-autosuggestions
 
 # Plugin history-search-multi-word loaded with investigating.
-zinit load zdharma/history-search-multi-word
+zinit wait lucid for zdharma/history-search-multi-word
+
 # man page generator for plugins
+zinit wait lucid for zinit-zsh/z-a-man
 
 # colors when running ls
 zinit pack for ls_colors
 
-# oh-my-zsh plugin that abstracts specifics about extracting compressed files
-# behind a single 'extract' command
-zinit snippet OMZ::plugins/extract
-
-# adds a function cpv that uses rsync to copy
-zinit snippet OMZ::plugins/cp
+# oh-my-zsh plugins: 
+# extract -> abstracts specifics about extracting compressed files behind a single 'extract' command
+# cp      -> adds a function cpv that uses rsync to copy
+zinit wait lucid for \
+    OMZ::plugins/extract \
+    OMZ::plugins/cp
 
 # Installs vim-plug
 vimplugpath="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload"
-zinit as"null" atpull"!mkdir -p $vimplugpath" cp"plug.vim -> $vimplugpath/plug.vim" for junegunn/vim-plug
+zinit wait lucid as"null" atpull"!mkdir -p $vimplugpath" cp"plug.vim -> $vimplugpath/plug.vim" for junegunn/vim-plug
 
-zinit as"program" atclone'perl Makefile.PL PREFIX=$ZPFX' \
+zinit wait lucid as"program" atclone'perl Makefile.PL PREFIX=$ZPFX' \
         atpull'%atclone' make'install' pick"$ZPFX/bin/git-cal" for light-mode k4rthik/git-cal
 
 # Gitignore plugin – commands gii and gi
-zinit wait"2" lucid for voronkovich/gitignore.plugin.zsh
+zinit wait'2' lucid for voronkovich/gitignore.plugin.zsh
 
 # adds integration with asdf to zsh
 zinit pick'asdf.sh' for light-mode @asdf-vm/asdf
@@ -70,10 +68,10 @@ zinit pick'asdf.sh' for light-mode @asdf-vm/asdf
 # github/hub
 zinit from'gh-r' as'program' bpick'*linux-amd64*' pick'*/bin/hub' atclone'rm hub-linux-*/share/man/man1/*.txt' for @github/hub
 
-# zaquestion/lab
-zinit from'gh-r' as'program' bpick'*linux_amd64*' pick'lab' for zaquestion/lab
+zinit wait lucid from'gh-r' as'program' for \
+    bpick'*x86_64*' pick'*/bin/googler' jarun/googler
 
-# jarun/googler
-zinit from'gh-r' as'program' bpick'*x86_64*' pick'*/bin/googler' for jarun/googler
+zinit wait lucid atload"zicompinit; zicdreplay" blockf for \
+    zsh-users/zsh-completions
 
-zinit cdreplay -q # <- execute compdefs provided by rest of plugins
+zinit wait lucid light-mode for blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions
