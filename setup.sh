@@ -13,4 +13,4 @@ done
 cd $HOME
 asdf install
 cd $PREV_DIR
-# source $HOME/.zshrc
+source $HOME/.zshrc
