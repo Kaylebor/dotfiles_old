@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  jdt:
+    image: kaylebor/eclipse.jdt.ls
+    network_mode: host
+  
+  jellyfin:
+    image: jellyfin/jellyfin:nightly
+    user: 1000:1000
+    volumes:
+      - jellyfin-config:/config
+      - jellyfin-cache:/cache
+      - /home/media:/media
+  
+  jupyter-minimal:
+    image: jupyter/minimal-notebook
+    environment: 
+      - JUPYTER_ENABLE_LAB=yes
+    ports: 
+      - 8888:8888
+
+volumes:
+  jellyfin-config:
+  jellyfin-cache:
