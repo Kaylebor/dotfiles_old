@@ -13,8 +13,8 @@ services:
       - jellyfin-cache:/cache
       - /home/media:/media
   
-  jupyter-minimal:
-    image: jupyter/minimal-notebook
+  jupyter-scipy:
+    image: jupyter/scipy-notebook
     environment: 
       - JUPYTER_ENABLE_LAB=yes
     ports: 

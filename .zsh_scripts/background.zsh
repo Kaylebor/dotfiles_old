@@ -19,8 +19,8 @@ if [[ $ENABLE_JELLYFIN -eq 1 ]]; then
     docker-compose up -d jellyfin
 fi
 
-if [[ $ENABLE_JUPYTER_MINIMAL -eq 1 ]]; then
-    docker-compose up -d jupyter-minimal
+if [[ $ENABLE_JUPYTER_SCIPY -eq 1 ]]; then
+    docker-compose up -d jupyter-scipy
 fi
 
 cd $PREV_DIR
