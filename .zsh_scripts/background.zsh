@@ -50,7 +50,7 @@ if [[ $ENABLE_JUPYTER_MINIMAL -eq 1 ]]; then
     if [[ $(check-running-containers $container_name) -lt 1  ]]; then
         prev_container=$(check-previous-container-name $container_name)
         if [[ -z $prev_container ]]; then
-            docker run -d -p 8888:8888 $container_name
+            docker run -d -e JUPYTER_ENABLE_LAB=yes -p 8888:8888 $container_name
         else
             docker start $prev_container 2>&1 > /dev/null
         fi
