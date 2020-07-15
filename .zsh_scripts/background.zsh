@@ -11,16 +11,8 @@ check-previous-container-name() {
 PREV_DIR=$(pwd)
 cd $(cd -P -- "$(dirname -- "$0")" && pwd -P)/docker
 
-if [[ $ENABLE_JDT -eq 1 ]]; then
-    docker-compose up -d jdt
-fi
-
-if [[ $ENABLE_JELLYFIN -eq 1 ]]; then
-    docker-compose up -d jellyfin
-fi
-
-if [[ $ENABLE_JUPYTER_SCIPY -eq 1 ]]; then
-    docker-compose up -d jupyter-scipy
-fi
+[[ $ENABLE_JDT -eq 1 ]] && docker-compose up -d jdt
+[[ $ENABLE_JELLYFIN -eq 1 ]] && docker-compose up -d jellyfin
+[[ $ENABLE_JUPYTER_SCIPY -eq 1 ]] && docker-compose up -d jupyter-scipy
 
 cd $PREV_DIR
