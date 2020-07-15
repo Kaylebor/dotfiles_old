@@ -17,9 +17,12 @@ services:
     image: jupyter/scipy-notebook
     environment: 
       - JUPYTER_ENABLE_LAB=yes
+    volumes:
+      - jupyter-scipy-home:/home/jovyan
     ports: 
       - 8888:8888
 
 volumes:
   jellyfin-config:
   jellyfin-cache:
+  jupyter-scipy-home:
