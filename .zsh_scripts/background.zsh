@@ -9,7 +9,7 @@ check-previous-container-name() {
 }
 
 PREV_DIR=$(pwd)
-cd $(cd -P -- "$(dirname -- "$0")" && pwd -P)/docker
+cd $(dirname -- "$0")/docker
 
 [[ $ENABLE_JDT -eq 1 ]] && docker-compose up -d jdt
 [[ $ENABLE_JELLYFIN -eq 1 ]] && docker-compose up -d jellyfin
