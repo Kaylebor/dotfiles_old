@@ -9,11 +9,11 @@ check-previous-container-name() {
 }
 
 if [[ $ENABLE_JDT -eq 1 ]]; then
-    jdt_container="kaylebor/eclipse.jdt.ls"
-    if [[ $(check-running-containers $jdt_container) -ge 1  ]]; then
-        prev_container=$(check-previous-container-name $jdt_container)
+    container_name="kaylebor/eclipse.jdt.ls"
+    if [[ $(check-running-containers $container_name) -lt 1  ]]; then
+        prev_container=$(check-previous-container-name $container_name)
         if [[ -z $prev_container ]]; then
-            docker run -d --net=host $jdt_container 2>&1 > /dev/null
+            docker run -d --net=host $container_name 2>&1 > /dev/null
         else
             docker start $prev_container 2>&1 > /dev/null
         fi
@@ -21,9 +21,9 @@ if [[ $ENABLE_JDT -eq 1 ]]; then
 fi
 
 if [[ $ENABLE_JELLYFIN -eq 1 ]]; then
-    jellyfin_container="jellyfin/jellyfin"
-    if [[ $(check-running-containers $jdt_container) -ge 1  ]]; then
-        prev_container=$(check-previous-container-name $jdt_container)
+    container_name="jellyfin/jellyfin"
+    if [[ $(check-running-containers $container_name) -lt 1  ]]; then
+        prev_container=$(check-previous-container-name $container_name)
         if [[ -z $prev_container ]]; then
             [[ -z $(docker volume ls | rg jellyfin-config) ]] && docker volume create jellyfin-config
             [[ -z $(docker volume ls | rg jellyfin-cache) ]] && docker volume create jellyfin-cache
@@ -38,7 +38,19 @@ if [[ $ENABLE_JELLYFIN -eq 1 ]]; then
                 -v /home/media:/media \
                 --user 1000:1000 \
                 --restart unless-stopped \
-                jellyfin/jellyfin:nightly 2>&1 > /dev/null
+                $container_name:nightly 2>&1 > /dev/null
+        else
+            docker start $prev_container 2>&1 > /dev/null
+        fi
+    fi
+fi
+
+if [[ $ENABLE_JUPYTER_MINIMAL -eq 1 ]]; then
+    container_name="jupyter/minimal-notebook"
+    if [[ $(check-running-containers $container_name) -lt 1  ]]; then
+        prev_container=$(check-previous-container-name $container_name)
+        if [[ -z $prev_container ]]; then
+            docker run -d -p 8888:8888 $container_name
         else
             docker start $prev_container 2>&1 > /dev/null
         fi
