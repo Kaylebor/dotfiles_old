@@ -7,6 +7,7 @@ services:
   
   jellyfin:
     image: jellyfin/jellyfin:nightly
+    network_mode: host
     user: 1000:1000
     volumes:
       - jellyfin-config:/config
