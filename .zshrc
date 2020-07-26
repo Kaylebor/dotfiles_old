@@ -13,18 +13,6 @@ source $HOME/.zsh_scripts/zshcomp.zsh
 # Initializes plugins (currently using zinit)
 source $HOME/.zsh_scripts/plugin-setup.zsh
 
-# Installs some things via asdf
-source $HOME/.zsh_scripts/asdf-installations.zsh
-
-# Installs Rust packages
-source $HOME/.zsh_scripts/rust-installations.zsh
-
-# Installs Go utilities
-source $HOME/.zsh_scripts/golang-installations.zsh
-
-# Installs Node utilities
-source $HOME/.zsh_scripts/node-installations.zsh
-
 # Uses bat for man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
@@ -39,3 +27,6 @@ source $HOME/.zsh_scripts/background.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Initializes direnv
+eval "$(direnv hook zsh)"

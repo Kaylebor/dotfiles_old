@@ -12,5 +12,22 @@ done
 
 cd $HOME
 asdf install
+
+# Installing Rust packages
+for package in exa hexyl; do
+    [[ ! -f $(which $package) ]] && cargo install package # sharkdp/fd
+done
+[[ ! -f $(which bat) ]] && cargo install --locked bat # sharkdp/bat
+[[ ! -f $(which fd) ]] && cargo install fd-find # sharkdp/fd
+[[ ! -f $(which rg) ]] && cargo install --git https://github.com/BurntSushi/ripgrep ripgrep --features 'pcre2'
+asdf reshim rust
+
+# Installing Node packages
+node-check-installed() { yarn global list --depth=0 | rg $1 }
+for package in tldr; do
+    [[ -z $(node-check-installed $package) ]] && yarn global add $package
+done
+asdf reshim nodejs
+
 cd $PREV_DIR
 source $HOME/.zshrc
