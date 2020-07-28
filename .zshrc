@@ -25,6 +25,9 @@ source $HOME/.zsh_scripts/aliases.zsh
 # Starts background processes
 source $HOME/.zsh_scripts/background.zsh
 
+# Extra device-specific stuff
+[[ -f $HOME/.zsh_local ]] && source $HOME/.zsh_local
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

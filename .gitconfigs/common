@@ -3,3 +3,6 @@
     eol = lf
     autocrlf = input
     pager = bat -l gitconfig
+[user]
+    email = veigabuenoender@gmail.com
+    name = Ender Veiga Bueno
