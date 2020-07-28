@@ -1,8 +1,8 @@
 [core]
-    editor = nvim
-    eol = lf
-    autocrlf = input
-    pager = bat -l gitconfig
+  editor = nvim
+  eol = lf
+  autocrlf = input
+  pager = bat -l gitconfig
 [user]
-    email = veigabuenoender@gmail.com
-    name = Ender Veiga Bueno
+  email = veigabuenoender@gmail.com
+  name = Ender Veiga Bueno
