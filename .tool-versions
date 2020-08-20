@@ -1,7 +1,7 @@
-rust 1.44.1
-golang 1.14.4
+rust 1.45.2
+golang 1.15
 python miniconda3-latest miniconda2-latest
 maven 3.6.3
-nodejs 14.5.0
+nodejs 14.8.0
 yarn 1.22.4
 neovim 0.4.3
