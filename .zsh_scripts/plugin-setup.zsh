@@ -54,9 +54,10 @@ zinit wait lucid for \
 
 # Installs vim-plug
 vimplugpath="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload"
-zinit wait lucid as"null" atpull"!mkdir -p $vimplugpath" cp"plug.vim -> $vimplugpath/plug.vim" for junegunn/vim-plug
+[[ ! -d $vimplugpath ]] && mkdir -p $vimplugpath
+zinit wait lucid as'null' cp"plug.vim -> $vimplugpath/plug.vim" for junegunn/vim-plug
 
-zinit wait lucid as"program" atclone'perl Makefile.PL PREFIX=$ZPFX' \
+zinit wait lucid as'program' atclone'perl Makefile.PL PREFIX=$ZPFX' \
   atpull'%atclone' make'install' pick"$ZPFX/bin/git-cal" for light-mode k4rthik/git-cal
 
 # Gitignore plugin – commands gii and gi
@@ -73,9 +74,5 @@ zinit wait lucid from'gh-r' as'program' for \
 
 zinit wait lucid atload"zicompinit; zicdreplay" blockf for \
   zsh-users/zsh-completions
-
-[[ ! -d "${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload" ]] && mkdir -p ${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload
-zinit wait lucid as'null' atclone"cp plug.vim ${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim" for \
-  junegunn/vim-plug
 
 zinit wait lucid light-mode for blockf atpull'zinit creinstall -q .' zsh-users/zsh-completions
