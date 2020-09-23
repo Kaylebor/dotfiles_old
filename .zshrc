@@ -3,6 +3,9 @@
 # zsh history settings
 export SAVEHIST=1000
 export HISTFILE=~/.zsh_history
+export PATH=$HOME/.local/bin:$PATH
+
+[[ -d ~/.zsh/functions ]] && export fpath=(~/.zsh/functions $fpath)
 
 # Script with user-defined functions
 source $HOME/.zsh_scripts/funcs.zsh
