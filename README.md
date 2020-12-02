@@ -9,7 +9,7 @@
 
 ## About <a name = "about"></a>
 
-Personal dotfiles, using xonsh and asdf.
+Personal dotfiles, using zsh and asdf.
 
 ### Applications included <a name = "apps"></a>
 
