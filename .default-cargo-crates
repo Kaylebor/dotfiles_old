@@ -1,0 +1,5 @@
+exa
+hexyl
+fd-find
+--git https://github.com/BurntSushi/ripgrep ripgrep --features 'pcre2'
+--locked bat

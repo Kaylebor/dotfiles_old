@@ -1,5 +1,5 @@
 #!/bin/bash
-FILES_TO_LINK=(.zshrc .p10k.zsh .zsh_scripts .gitconfigs .tool-versions)
+FILES_TO_LINK=(.zshrc .p10k.zsh .zsh_scripts .gitconfigs .tool-versions .default-cargo-crates)
 
 cd $(dirname -- "$0")
 DIR="$(pwd)"
@@ -91,35 +91,41 @@ source $asdf_dir/asdf.sh
 
 # Installing asdf plugins
 if [[ $reinstall_asdf -eq 1 ]]; then
+  asdf update
   while IFS= read -r plugin; do
     asdf plugin add ${plugin%% *}
   done < $DIR/.tool-versions
+  bash -c '${ASDF_DATA_DIR:=$asdf_dir}/plugins/nodejs/bin/import-release-team-keyring'
+  reinstall_packages=1
 fi
 
 # Installing asdf packages
-[[ $reinstall_packages -eq 1 || $reinstall_asdf -eq 1 ]] && asdf install
-
-# Installing Rust packages
-for package in exa hexyl; do
-  [[ $reinstall_packages -eq 1 || ! -f $HOME/.asdf/shims/$package ]] && cargo install --force $package
-done
-[[ $reinstall_packages -eq 1 || ! -f $HOME/.asdf/shims/fd ]] && cargo install --force fd-find # sharkdp/fd
-[[ $reinstall_packages -eq 1 || ! -f $HOME/.asdf/shims/bat ]] && cargo install --force --locked bat # sharkdp/bat
-[[ $reinstall_packages -eq 1 || ! -f $HOME/.asdf/shims/rg ]] && cargo install --force --git https://github.com/BurntSushi/ripgrep ripgrep --features 'pcre2'
-asdf reshim rust
+if [[ $reinstall_packages -eq 1 || $reinstall_asdf -eq 1 ]]; then
+  asdf install
+fi
 
 # Installing Node packages
 for package in tldr; do
-  [[ $reinstall_packages -eq 1 || ! -f $HOME/.asdf/shims/$package ]] && yarn global add $package
+  [[ $reinstall_packages -eq 1 || ! -f $asdf_dir/shims/$package ]] && yarn global add $package
 done
 asdf reshim nodejs
 
 # Installing completions
-mkdir -p ${bash_completion_custom_dir:=${XDG_DATA_HOME:=$HOME/.local/share}/bash-completion/completions}
-for completion_file in $asdf_dir/completions/asdf.bash; do
-  filename=$bash_completion_custom_dir/${completion_file##*/}
-  [[ ! -f $filename ]] && ln -s $completion_file $filename
-done
+if [[ $reinstall_packages -eq 1 ]]; then
+  mkdir -p ${bash_completion_custom_dir:=${XDG_DATA_HOME:=$HOME/.local/share}/bash-completion/completions}
+
+  for completion_file in $asdf_dir/completions/asdf.bash; do
+    filename=$bash_completion_custom_dir/${completion_file##*/}
+    [[ ! -f $filename ]] && ln -s $completion_file $filename
+  done
+
+  fd -Itf '^_[a-z\-_]*$' $asdf_dir/installs/ | sort -r | xargs -I{} cp {} $HOME/.zinit/completions
+  curl -L https://raw.githubusercontent.com/ogham/exa/master/completions/completions.zsh -o $HOME/.zinit/completions/_exa
+fi
+
+# Installing manuals
+fd -Itf '\.1$' $asdf_dir/installs/ | sort -n | xargs -I{} sudo cp {} /usr/local/man/man1/
+mandb
 
 # Installing neovim configuration
 init_vim_path=$HOME/.config/nvim/init.vim

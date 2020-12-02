@@ -1,10 +1,6 @@
 version: "3.8"
 
 services:
-  jdt:
-    image: kaylebor/eclipse.jdt.ls:latest
-    network_mode: host
-  
   jellyfin:
     image: jellyfin/jellyfin:nightly
     network_mode: host
