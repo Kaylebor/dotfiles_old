@@ -4,9 +4,17 @@ passgen() {
 }
 
 html-search-class() {
-  rg -thtml "class=\"[a-zA-Z0-9-]* ?$1 ?[a-zA-Z0-9-]*\""
+  rg --pcre2 -othtml "class=[\"']([[:alnum:]_-]* +)*\K$1(?=([[:alnum:]_-]* +)*[\"'])"
+}
+
+html-search-class-file() {
+  rg --pcre2 -lthtml "class=[\"']([[:alnum:]_-]* +)*\K$1(?=([[:alnum:]_-]* +)*[\"'])"
 }
 
 html-search-id() {
-  rg -thtml "id=\"$1\""
+  rg --pcre2 -othtml "id=[\"'] *\K$1(?= *[\"'])"
+}
+
+html-search-id-file() {
+  rg --pcre2 -lthtml "id=[\"'] *\K$1(?= *[\"'])"
 }
