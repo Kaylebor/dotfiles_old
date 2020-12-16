@@ -7,6 +7,9 @@ export PATH=$HOME/.local/bin:$PATH
 
 [[ -d ~/.zsh/functions ]] && export fpath=(~/.zsh/functions $fpath)
 
+# ripgrep configuration file
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+
 # Script with user-defined functions
 source $HOME/.zsh_scripts/funcs.zsh
 
