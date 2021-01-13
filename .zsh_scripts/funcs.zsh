@@ -54,9 +54,9 @@ html-search() {
   [[ $search_files -eq 1 ]] && args+=-l
 
   if [[ $search_class -eq 1 ]]; then
-    regex="class=[\\\"']([[:alnum:]_-]* +)*\K$regex(?=([[:alnum:]_-]* +)*[\\\"'])"
+    regex="class=[\\\"']([[:alnum:]_-]* +)*\K$regex(?=[ \\\"])"
   elif [[ $search_id -eq 1 ]]; then
-    regex="id=[\\\"'] *\K$regex(?= *[\\\"'])"
+    regex="id=[\\\"'] *\K$regex(?=[ \\\"])"
   fi
 
   if [[ $count -eq 1 ]]; then
