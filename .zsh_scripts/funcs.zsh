@@ -50,7 +50,7 @@ html-search() {
     return -1
   fi
 
-  args=(-P -o -thtml)
+  local args=(-P -o -thtml)
   [[ $search_files -eq 1 ]] && args+=-l
 
   if [[ $search_class -eq 1 ]]; then
