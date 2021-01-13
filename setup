@@ -1,5 +1,5 @@
 #!/bin/bash
-FILES_TO_LINK=(.zshrc .p10k.zsh .zsh_scripts .gitconfigs .tool-versions .default-cargo-crates .ripgreprc)
+FILES_TO_LINK=(.zshrc .p10k.zsh .zsh_scripts .gitconfigs .tool-versions .ripgreprc)
 
 cd $(dirname -- "$0")
 DIR="$(pwd)"
@@ -109,6 +109,14 @@ for package in tldr; do
   [[ $reinstall_packages -eq 1 || ! -f $asdf_dir/shims/$package ]] && yarn global add $package
 done
 asdf reshim nodejs
+
+# Installing Rust crates
+for crate in exa hexyl fd-find; do
+  [[ $reinstall_packages -eq 1 || ! -f $asdf_dir/shims/$crate ]] && cargo install --force $crate
+done
+[[ $reinstall_packages -eq 1 || ! -f $asdf_dir/shims/rg ]] && cargo install --force --git https://github.com/BurntSushi/ripgrep ripgrep --features
+[[ $reinstall_packages -eq 1 || ! -f $asdf_dir/shims/bat ]] && cargo install --force --locked bat
+asdf reshim rust
 
 # Installing completions
 if [[ $reinstall_packages -eq 1 ]]; then
