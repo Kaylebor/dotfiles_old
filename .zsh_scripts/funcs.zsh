@@ -7,16 +7,16 @@ html-search() {
   for arg in "$@"; do
     case $arg in
       -c|--class)
-      search_class=1
+      local search_class=1
       ;;
       -i|--id)
-      search_id=1
+      local search_id=1
       ;;
       -f|--files)
-      search_files=1
+      local search_files=1
       ;;
       --count)
-      count=1
+      local count=1
       ;;
       -h|--help)
       echo "Searches for a given class or id on all html files in the project"
@@ -33,7 +33,7 @@ html-search() {
       echo "                  if --file is set, counts files that contains matches"
       ;;
       *)
-      regex=$arg
+      local regex=$arg
     esac
   done
 
@@ -54,9 +54,9 @@ html-search() {
   [[ $search_files -eq 1 ]] && args+=-l
 
   if [[ $search_class -eq 1 ]]; then
-    regex="class=[\\\"']([[:alnum:]_-]* +)*\K$regex(?=[ \\\"])"
+    local regex="class=[\\\"']([[:alnum:]_-]* +)*\K$regex(?=[ \\\"])"
   elif [[ $search_id -eq 1 ]]; then
-    regex="id=[\\\"'] *\K$regex(?=[ \\\"])"
+    local regex="id=[\\\"'] *\K$regex(?=[ \\\"])"
   fi
 
   if [[ $count -eq 1 ]]; then
