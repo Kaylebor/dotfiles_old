@@ -51,7 +51,7 @@ html-search() {
   fi
 
   local args=(-P -o -thtml)
-  [[ $search_files -eq 1 ]] && local args+=-l
+  [[ $search_files -eq 1 ]] && args+=-l
 
   if [[ $search_class -eq 1 ]]; then
     local regex="class=[\\\"']([[:alnum:]_-]* +)*\K$regex(?=[ \\\"])"
