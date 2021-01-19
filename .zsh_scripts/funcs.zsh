@@ -4,13 +4,20 @@ passgen() {
 }
 
 html-search() {
+  local search_tags_count=0
   for arg in "$@"; do
     case $arg in
       -c|--class)
       local search_class=1
+      ((search_tags_count++))
       ;;
       -i|--id)
       local search_id=1
+      ((search_tags_count++))
+      ;;
+      -t|--tag)
+      local search_tag=1
+      ((search_tags_count++))
       ;;
       -f|--files)
       local search_files=1
@@ -27,6 +34,7 @@ html-search() {
       echo "  -h, --help      displays this message"
       echo "  -c, --class     searches for html classes that match the query"
       echo "  -i, --id        searches for html ids that match the query"
+      echo "  -t, --tag       searches for html tags that match the query"
       echo "  -f, --files     modifies the query to return only the files that match without the matches"
       echo "  --count         instead of displaying results, counts how many matches it finds"
       echo "                  if --class or --id are set, counts total matches in all files"
@@ -37,12 +45,12 @@ html-search() {
     esac
   done
 
-  if [[ $search_class -eq 1 && $search_id -eq 1 ]]; then
-    echo "No more than one of [--class, --id] must be set; please specify only one of these options and try again"
+  if [[ $search_tags_count -gt 1 ]]; then
+    echo "No more than one of [--class, --id, --tag] must be set; please specify only one of these options and try again"
     return -1
   fi
-  if [[ $search_class -ne 1 && $search_id -ne 1 ]]; then
-    echo "At least one of [--class, --id] must be set; please specify one of these options and try again"
+  if [[ $search_tags_count -lt 1 ]]; then
+    echo "At least one of [--class, --id, --tag] must be set; please specify one of these options and try again"
     return -1
   fi
   if [[ -z $regex ]]; then
@@ -57,6 +65,8 @@ html-search() {
     local regex="class=[\\\"']([[:alnum:]_-]* +)*\K$regex(?=[ \\\"])"
   elif [[ $search_id -eq 1 ]]; then
     local regex="id=[\\\"'] *\K$regex(?=[ \\\"])"
+  elif [[ $search_tag -eq 1 ]]; then
+    local regex="< *\K$regex(?= *)"
   fi
 
   if [[ $count -eq 1 ]]; then
