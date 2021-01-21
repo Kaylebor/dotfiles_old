@@ -1,5 +1,5 @@
 #!/bin/bash
-FILES_TO_LINK=(.zshrc .p10k.zsh .zsh_scripts .gitconfigs .tool-versions .ripgreprc)
+FILES_TO_LINK=(.zshrc .p10k.zsh .scripts .gitconfigs .tool-versions .ripgreprc)
 
 cd $(dirname -- "$0")
 DIR="$(pwd)"

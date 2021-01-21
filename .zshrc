@@ -11,25 +11,25 @@ export PATH=$HOME/.local/bin:$PATH
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 # Script with user-defined functions
-source $HOME/.zsh_scripts/funcs.zsh
+source $HOME/.scripts/zsh/funcs.zsh
 
 # ZSH completion styles
-source $HOME/.zsh_scripts/zshcomp.zsh
+source $HOME/.scripts/zsh/zshcomp.zsh
 
 # Initializes plugins (currently using zinit)
-source $HOME/.zsh_scripts/plugin-setup.zsh
+source $HOME/.scripts/zsh/plugin-setup.zsh
 
 # Uses bat for man pages
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Fixes keybindings; allows to use CTRL+Left/Right to skip words
-source $HOME/.zsh_scripts/keybindings-fix.zsh
+source $HOME/.scripts/zsh/keybindings-fix.zsh
 
 # Sets aliases
-source $HOME/.zsh_scripts/aliases.zsh
+source $HOME/.scripts/zsh/aliases.zsh
 
 # Starts background processes
-source $HOME/.zsh_scripts/background.zsh
+source $HOME/.scripts/zsh/background.zsh
 
 # Extra device-specific stuff
 [[ -f $HOME/.zsh_local ]] && source $HOME/.zsh_local
