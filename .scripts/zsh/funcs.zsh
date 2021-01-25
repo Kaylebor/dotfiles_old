@@ -1,8 +1,6 @@
 #!/bin/zsh
 
-passgen() {
-  < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo;
-}
+passgen() { < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo; }
 
 html-search() {
   local search_tags_count=0
@@ -72,24 +70,26 @@ html-search() {
   local quote_regex="[\"\\']"
 
   local full_regex=()
-  for reg in $regex; do
-    if [[ $search_class -eq 1 ]]; then
+  if [[ $search_class -eq 1 ]]; then
+    for reg in $regex; do
       full_regex+=-e
       full_regex+="class=$quote_regex*( *$valid_css_name +)*\K$reg(?=( +$valid_css_name *)*$quote_regex)"
-    elif [[ $search_id -eq 1 ]]; then
+    done
+  elif [[ $search_id -eq 1 ]]; then
+    for reg in $regex; do
       full_regex+=-e
       full_regex+="id=$quote_regex *\K$reg(?= *$quote_regex)"
-    elif [[ $search_tag -eq 1 ]]; then
+    done
+  elif [[ $search_tag -eq 1 ]]; then
+    for reg in $regex; do
       full_regex+=-e
       full_regex+="< *\K$reg(?= *)"
-    fi
-  done
+    done
+  fi
 
-  set -x
   if [[ $count -eq 1 ]]; then
     echo "Total: $(rg $args $full_regex | wc -l)"
   else
     rg $args $full_regex
   fi
-  set +x
 }
