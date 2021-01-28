@@ -9,3 +9,4 @@ neovim 0.4.4
 erlang 23.2.1
 elixir 1.11.3-otp-23
 java corretto-15.0.1.9.1
+ruby 3.0.0
