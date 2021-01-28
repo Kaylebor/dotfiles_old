@@ -82,6 +82,26 @@ for file in ${FILES_TO_LINK[@]}; do
   ln -s "$DIR/$file" "$HOME/"
 done
 
+# Installing system dependencies
+sudo apt-get update
+sudo apt-get -y install \
+  build-essential \
+  autoconf \
+  m4 \
+  libncurses5-dev \
+  libwxgtk3.0-gtk3-dev \
+  libgl1-mesa-dev \
+  libglu1-mesa-dev \
+  libpng-dev \
+  libssh-dev \
+  unixodbc-dev \
+  xsltproc \
+  fop \
+  libxml2-utils \
+  libncurses-dev \
+  openjdk-11-jdk \
+  pcre2-utils
+
 # Installing asdf
 if [[ ! -d ${asdf_dir:=$HOME/.asdf} ]]; then
   git clone https://github.com/asdf-vm/asdf.git $asdf_dir --branch v0.8.0
@@ -95,7 +115,7 @@ if [[ $reinstall_asdf -eq 1 ]]; then
   while IFS= read -r plugin; do
     asdf plugin add ${plugin%% *}
   done < $DIR/.tool-versions
-  bash -c '${ASDF_DATA_DIR:=$asdf_dir}/plugins/nodejs/bin/import-release-team-keyring'
+  bash -c "${ASDF_DATA_DIR:=$asdf_dir}/plugins/nodejs/bin/import-release-team-keyring"
   reinstall_packages=1
 fi
 
@@ -114,7 +134,7 @@ asdf reshim nodejs
 for crate in exa hexyl fd-find; do
   [[ $reinstall_packages -eq 1 || ! -f $asdf_dir/shims/$crate ]] && cargo install --force $crate
 done
-[[ $reinstall_packages -eq 1 || ! -f $asdf_dir/shims/rg ]] && cargo install --force --git https://github.com/BurntSushi/ripgrep ripgrep --features
+[[ $reinstall_packages -eq 1 || ! -f $asdf_dir/shims/rg ]] && cargo install --force ripgrep --features 'pcre2'
 [[ $reinstall_packages -eq 1 || ! -f $asdf_dir/shims/bat ]] && cargo install --force --locked bat
 asdf reshim rust
 
@@ -132,7 +152,9 @@ if [[ $reinstall_packages -eq 1 ]]; then
 fi
 
 # Installing manuals
-fd -Itf '\.1$' $asdf_dir/installs/ | sort -n | xargs -I{} sudo cp {} /usr/local/man/man1/
+man_dir=/usr/share/man/man1/
+[[ ! -d "$man_dir" ]] && sudo mkdir -p $man_dir
+fd -Ia -tf -e1 -e1.gz '.*' $asdf_dir/installs | sort -n | xargs -I{} sudo cp {} $man_dir
 mandb
 
 # Installing neovim configuration

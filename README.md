@@ -48,7 +48,3 @@ bash setup
 The first time it may take a while, since some steps involve compiling source code.
 
 `setup` contains some additional, optional arguments; check `./setup --help` for more info
-
-### Prerequisites <a name = "prerequisites"></a>
-
-For erlang, [make sure to install the required dependencies](https://github.com/asdf-vm/asdf-erlang#before-asdf-install)
