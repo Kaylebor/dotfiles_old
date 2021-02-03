@@ -86,7 +86,7 @@
       source $HOME/.scripts/zsh/keybindings-fix.zsh
       source $HOME/.scripts/zsh/funcs.zsh
     ";
-    initExtra = "if [ -e /home/kay/.nix-profile/etc/profile.d/nix.sh ]; then . /home/kay/.nix-profile/etc/profile.d/nix.sh; fi";
+    initExtra = "if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi";
   };
 
   programs.git = {
