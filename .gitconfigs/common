@@ -1,8 +1,0 @@
-[core]
-  editor = code -w
-  eol = lf
-  autocrlf = input
-  pager = bat -l gitconfig
-[user]
-  email = eveiga@denodo.com
-  name = Ender Veiga
