@@ -28,10 +28,15 @@ for file in ${FILES_TO_LINK[@]}; do
 done
 
 # Installing nix
-! command -v nix-env > /dev/null && bash <(curl -L https://nixos.org/nix/install)
+if ! command -v nix-env > /dev/null; then
+  bash <(curl -L https://nixos.org/nix/install)
+  if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+    . "$HOME/.nix-profile/etc/profile.d/nix.sh"
+  fi
+fi
 
 # Installing Home Manager
-if ! command -v home-manager; then
+if ! command -v home-manager > /dev/null; then
   nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
   nix-channel --update
   nix-shell '<home-manager>' -A install
