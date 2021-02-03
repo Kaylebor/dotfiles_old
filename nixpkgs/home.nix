@@ -36,7 +36,12 @@
         "fd"
         "fzf"
         "ripgrep"
+        "ssh-agent"
       ];
+      extraConfig =
+      "
+      zstyle :omz:plugins:ssh-agent identities id_ed25519
+      ";
       theme = "agnoster";
     };
     plugins = [
@@ -71,11 +76,13 @@
     shellAliases = {
       ls = "exa";
     };
-    envExtra = "
+    envExtra =
+    "
       export MANPAGER=\"sh -c 'col -bx | bat -l man -p'\"
       export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
     ";
-    initExtraBeforeCompInit = "
+    initExtraBeforeCompInit =
+    "
       source $HOME/.scripts/zsh/keybindings-fix.zsh
       source $HOME/.scripts/zsh/funcs.zsh
     ";
