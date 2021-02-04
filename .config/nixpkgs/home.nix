@@ -12,7 +12,6 @@
     ripgrep
     ripgrep-all
     bat
-    zsh
     erlang
     elixir
     ruby
