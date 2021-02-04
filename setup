@@ -1,5 +1,5 @@
 #!/bin/bash
-FILES_TO_LINK=(.scripts .ripgreprc)
+FILES_TO_LINK=(.scripts .ripgreprc .config/nixpkgs)
 
 cd $(dirname -- "$0")
 DIR="$(pwd)"
@@ -24,7 +24,7 @@ done
 [[ ! -d "$HOME/.backups" ]] && mkdir -p "$HOME/.backups"
 for file in ${FILES_TO_LINK[@]}; do
   [[ -e "$HOME/$file" ]] && mv "$HOME/$file" "$HOME/.backups/"
-  ln -s "$DIR/$file" "$HOME/"
+  ln -s "$DIR/$file" "$HOME/$file"
 done
 
 # Installing nix
@@ -41,8 +41,6 @@ if ! command -v home-manager > /dev/null; then
   nix-channel --update
   nix-shell '<home-manager>' -A install
 fi
-
-ln -s "$DIR/nixpkgs" "$HOME/.config/nixpkgs"
 
 home-manager switch
 

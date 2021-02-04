@@ -78,6 +78,7 @@
     };
     envExtra =
     "
+      export LANG=C.UTF-8
       export MANPAGER=\"sh -c 'col -bx | bat -l man -p'\"
       export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
     ";
