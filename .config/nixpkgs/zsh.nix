@@ -57,6 +57,7 @@
     ];
     shellAliases = {
       ls = "exa";
+      git = "hub";
     };
     envExtra =
     "
