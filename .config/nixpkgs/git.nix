@@ -10,6 +10,7 @@
         eol = "lf";
         autocrlf = "input";
       };
+      pull.rebase = "false";
     };
     userEmail = "veigabuenoender@gmail.com";
     userName = "Ender Veiga";
