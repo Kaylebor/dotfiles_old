@@ -29,7 +29,11 @@ done
 
 # Installing nix
 if ! command -v nix-env > /dev/null; then
-  bash <(curl -L https://nixos.org/nix/install)
+  unameOut="$(uname -s)"
+  case "${unameOut}" in
+    Darwin*) bash <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume;;
+    *)       bash <(curl -L https://nixos.org/nix/install)
+  esac
   if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
     . "$HOME/.nix-profile/etc/profile.d/nix.sh"
   fi
@@ -47,6 +51,11 @@ home-manager switch
 if [[ ! $SHELL =~ "zsh$" ]]; then
   [[ ! $(grep "$HOME/.nix-profile/bin/zsh" /etc/shells) ]] && echo "$HOME/.nix-profile/bin/zsh" | sudo tee -a /etc/shells
   chsh $USER -s "$HOME/.nix-profile/bin/zsh"
+fi
+
+# Installing asdf
+if ! command -v asdf > /dev/null; then
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
 fi
 
 echo "Finished; you may have to reopen the shell, or source .zshrc again"

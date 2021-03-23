@@ -61,6 +61,7 @@
     };
     envExtra =
     "
+      export LC_ALL=en_US.UTF-8
       export LANG=C.UTF-8
       export MANPAGER=\"sh -c 'col -bx | bat -l man -p'\"
       export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
@@ -70,6 +71,14 @@
       source $HOME/.scripts/zsh/keybindings-fix.zsh
       source $HOME/.scripts/zsh/funcs.zsh
     ";
-    initExtra = "if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi";
+    initExtra = "
+      if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+        . $HOME/.nix-profile/etc/profile.d/nix.sh;
+      fi
+      . $HOME/.asdf/asdf.sh
+      . ~/.asdf/plugins/java/set-java-home.zsh
+
+      test -e \"\${HOME}/.iterm2_shell_integration.zsh\" && source \"\${HOME}/.iterm2_shell_integration.zsh\"
+      ";
   };
 }
