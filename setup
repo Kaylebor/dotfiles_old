@@ -58,4 +58,14 @@ if ! command -v asdf > /dev/null; then
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
 fi
 
+# Installing Dracula ZSH theme
+git clone https://github.com/dracula/zsh.git .dracula/zsh
+ln -s $DIR/.dracula/zsh/dracula.zsh-theme $HOME/.oh-my-zsh/themes/dracula.zsh-theme
+
+# Installing Dracula Sublime theme (for bat)
+mkdir -p $HOME/.bat-themes
+git clone https://github.com/dracula/sublime.git .dracula/sublime
+ln -s $DIR/.dracula/sublime/Dracula.tmTheme $HOME/.bat-themes/Dracula.tmTheme
+
+
 echo "Finished; you may have to reopen the shell, or source .zshrc again"

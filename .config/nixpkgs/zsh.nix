@@ -13,6 +13,7 @@
     oh-my-zsh = {
       enable = true;
       plugins = [
+        "asdf"
         "extract"
         "cp"
         "fd"
@@ -24,7 +25,8 @@
       "
       zstyle :omz:plugins:ssh-agent identities id_ed25519
       ";
-      theme = "agnoster";
+      theme = "dracula";
+      custom = "$HOME/.oh-my-zsh";
     };
     plugins = [
       {

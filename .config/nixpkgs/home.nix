@@ -26,4 +26,8 @@
     enable = true;
     path = "…";
   };
+
+  programs.bat.themes = {
+    dracula = "$HOME/.bat-themes/Dracula.tmTheme";
+  };
 }
