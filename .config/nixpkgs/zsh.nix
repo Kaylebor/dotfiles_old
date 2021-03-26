@@ -59,15 +59,14 @@
       ls = "exa";
       git = "hub";
     };
-    envExtra =
-    "
-      export LC_ALL=en_US.UTF-8
-      export LANG=C.UTF-8
-      export MANPAGER=\"sh -c 'col -bx | bat -l man -p'\"
-      export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
-    ";
-    initExtraBeforeCompInit =
-    "
+    sessionVariables = {
+      LC_ALL="en_US.UTF-8";
+      LANG="C.UTF-8";
+      MANPAGER="sh -c 'col -bx | bat -l man -p'";
+      RIPGREP_CONFIG_PATH="$HOME/.ripgreprc";
+    };
+    initExtraBeforeCompInit = "
+      path+=/usr/local/sbin
       source $HOME/.scripts/zsh/keybindings-fix.zsh
       source $HOME/.scripts/zsh/funcs.zsh
     ";
