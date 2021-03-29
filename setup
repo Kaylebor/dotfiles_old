@@ -1,5 +1,5 @@
 #!/bin/bash
-FILES_TO_LINK=(.scripts .ripgreprc .config/nixpkgs)
+FILES_TO_LINK=(.tool-versions .scripts .ripgreprc .config/nixpkgs)
 
 cd $(dirname -- "$0")
 DIR="$(pwd)"
@@ -57,6 +57,9 @@ fi
 if ! command -v asdf > /dev/null; then
   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
 fi
+
+# Installing asdf languages
+asdf install
 
 # Installing Dracula ZSH theme
 git clone https://github.com/dracula/zsh.git .dracula/zsh
