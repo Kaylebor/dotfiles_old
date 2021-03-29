@@ -12,10 +12,6 @@
     ripgrep
     ripgrep-all
     bat
-    erlang
-    elixir
-    ruby
-    python
     fzf
     direnv
     gitAndTools.hub
