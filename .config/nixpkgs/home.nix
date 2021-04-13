@@ -14,8 +14,9 @@
     bat
     fzf
     direnv
-    gitAndTools.hub
     gitAndTools.delta
+    abduco
+    dvtm
   ];
 
   programs.home-manager = {
