@@ -9,8 +9,10 @@
         editor = "code -w";
         eol = "lf";
         autocrlf = "input";
+        excludesfile = "~/.config/git/.gitignore.global";
       };
       pull.rebase = "false";
+      commit.template = "~/.config/git/.gitmessage";
     };
     userEmail = "veigabuenoender@gmail.com";
     userName = "Ender Veiga";

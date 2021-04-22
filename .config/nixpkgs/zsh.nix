@@ -71,6 +71,7 @@
       path+=/usr/local/sbin
       source $HOME/.scripts/zsh/keybindings-fix.zsh
       source $HOME/.scripts/zsh/funcs.zsh
+      [[ -a $HOME/.localenv ]] && source $HOME/.localenv
     ";
     initExtra = "
       if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then

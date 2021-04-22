@@ -1,5 +1,5 @@
 #!/bin/bash
-FILES_TO_LINK=(.tool-versions .scripts .ripgreprc .config/nixpkgs)
+FILES_TO_LINK=(.tool-versions .scripts .ripgreprc .config/nixpkgs .config/git/.gitignore.global)
 
 cd $(dirname -- "$0")
 DIR="$(pwd)"
