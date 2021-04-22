@@ -69,18 +69,26 @@
     };
     initExtraBeforeCompInit = "
       path+=/usr/local/sbin
-      source $HOME/.scripts/zsh/keybindings-fix.zsh
-      source $HOME/.scripts/zsh/funcs.zsh
-      [[ -a $HOME/.localenv ]] && source $HOME/.localenv
+      function source_from_array {
+        for file in $1; [[ -e $file ]] && source $file
+      }
+      source_files=(
+        $HOME/.localenv
+        $HOME/.scripts/zsh/funcs.zsh
+        $HOME/.scripts/zsh/keybindings-fix.zsh
+      )
+      source_from_array $source_files
+      unset source_files
     ";
     initExtra = "
-      if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
-        . $HOME/.nix-profile/etc/profile.d/nix.sh;
-      fi
-      . $HOME/.asdf/asdf.sh
-      . ~/.asdf/plugins/java/set-java-home.zsh
-
-      test -e \"\${HOME}/.iterm2_shell_integration.zsh\" && source \"\${HOME}/.iterm2_shell_integration.zsh\"
+      extra_source_files=(
+        $HOME/.nix-profile/etc/profile.d/nix.sh
+        $HOME/.asdf/asdf.sh
+        $HOME/.asdf/plugins/java/set-java-home.zsh
+        $HOME/.iterm2_shell_integration.zsh
+      )
+      source_from_array $extra_source_files
+      unset extra_source_files
       ";
   };
 }
