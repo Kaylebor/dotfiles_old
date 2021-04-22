@@ -16,6 +16,6 @@
       pull.ff = "only";
     };
     userEmail = "veigabuenoender@gmail.com";
-    userName = "Ender Veiga";
+    userName = "Ender Veiga Bueno";
   };
 }
