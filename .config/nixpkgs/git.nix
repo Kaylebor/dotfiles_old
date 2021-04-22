@@ -11,8 +11,9 @@
         autocrlf = "input";
         excludesfile = "~/.config/git/.gitignore.global";
       };
-      pull.rebase = "false";
       commit.template = "~/.config/git/.gitmessage";
+      branch.autosetupmerge = "always";
+      pull.ff = "only";
     };
     userEmail = "veigabuenoender@gmail.com";
     userName = "Ender Veiga";
