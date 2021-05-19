@@ -72,6 +72,14 @@
       function source_from_array {
         for file in $1; [[ -e $file ]] && source $file
       }
+      function sort_uniq {
+        if [[ -z $@ ]]; then
+          local to_sort=$(</dev/stdin)
+          printf \"%s\n\" $\{to_sort[@]} | awk '{$1=$1};1' | sort -u
+        else
+          printf \"%s\n\" $@ | awk '{$1=$1};1' | sort -u
+        fi
+      }
       source_files=(
         $HOME/.localenv
         $HOME/.scripts/zsh/funcs.zsh
