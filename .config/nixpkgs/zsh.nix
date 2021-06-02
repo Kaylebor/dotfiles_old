@@ -69,17 +69,8 @@
     };
     initExtraBeforeCompInit = "
       path+=/usr/local/sbin
-      function source_from_array {
-        for file in $1; [[ -e $file ]] && source $file
-      }
-      function sort_uniq {
-        if [[ -z $@ ]]; then
-          local to_sort=$(</dev/stdin)
-          printf \"%s\n\" $\{to_sort[@]} | awk '{$1=$1};1' | sort -u
-        else
-          printf \"%s\n\" $@ | awk '{$1=$1};1' | sort -u
-        fi
-      }
+    ";
+    initExtra = "
       source_files=(
         $HOME/.localenv
         $HOME/.scripts/zsh/funcs.zsh
@@ -95,8 +86,17 @@
         $HOME/.asdf/plugins/java/set-java-home.zsh
         $HOME/.iterm2_shell_integration.zsh
       )
-      source_from_array $extra_source_files
-      unset extra_source_files
+
+      for file in $source_files; do
+        [[ -e $file ]] && source $file
+      done
+      
+      unset source_files
+
+      if [[ -n $(command -v op) ]]; then
+        eval \"$(op completion zsh)\"
+        compdef _op op
+      fi
       ";
   };
 }

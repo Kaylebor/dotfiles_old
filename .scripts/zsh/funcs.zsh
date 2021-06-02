@@ -1,8 +1,19 @@
 #!/bin/zsh
 
-passgen() { < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo; }
+function passgen { < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo; }
 
-html-search() {
+function op-signin-my { eval $(op signin my) }
+
+function sort_uniq {
+  if [[ -z $@ ]]; then
+    local to_sort=$(</dev/stdin)
+    printf "%s\n" ${to_sort[@]} | awk '{$1=$1};1' | sort -u
+  else
+    printf "%s\n" $@ | awk '{$1=$1};1' | sort -u
+  fi
+}
+
+function html-search {
   local search_tags_count=0
   local regex=()
   for arg in "$@"; do
