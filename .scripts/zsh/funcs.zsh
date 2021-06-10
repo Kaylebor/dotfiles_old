@@ -4,7 +4,7 @@ function passgen { < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c${1:-32};echo; }
 
 function op-signin-my { eval $(op signin my) }
 
-function sort_uniq {
+function sort-uniq {
   if [[ -z $@ ]]; then
     local to_sort=$(</dev/stdin)
     printf "%s\n" ${to_sort[@]} | awk '{$1=$1};1' | sort -u

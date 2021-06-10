@@ -59,13 +59,17 @@
     ];
     shellAliases = {
       ls = "exa";
-      git = "hub";
+      ical = "icalBuddy";
+      icaln = "icalBuddy -n";
+      icalt = "icalBuddy eventsToday";
+      icaltn = "icalBuddy -n eventsToday";
     };
     sessionVariables = {
       LC_ALL="en_US.UTF-8";
       LANG="C.UTF-8";
       MANPAGER="sh -c 'col -bx | bat -l man -p'";
       RIPGREP_CONFIG_PATH="$HOME/.ripgreprc";
+      BAT_THEME="Dracula";
     };
     initExtraBeforeCompInit = "
       path+=/usr/local/sbin
@@ -75,12 +79,6 @@
         $HOME/.localenv
         $HOME/.scripts/zsh/funcs.zsh
         $HOME/.scripts/zsh/keybindings-fix.zsh
-      )
-      source_from_array $source_files
-      unset source_files
-    ";
-    initExtra = "
-      extra_source_files=(
         $HOME/.nix-profile/etc/profile.d/nix.sh
         $HOME/.asdf/asdf.sh
         $HOME/.asdf/plugins/java/set-java-home.zsh
