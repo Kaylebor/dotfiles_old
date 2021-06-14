@@ -3,6 +3,7 @@
     ./git.nix
     ./zsh.nix
     ./neovim.nix
+    ./local.nix
   ];
   
   home.packages = with pkgs; [

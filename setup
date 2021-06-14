@@ -46,6 +46,10 @@ if ! command -v home-manager > /dev/null; then
   nix-shell '<home-manager>' -A install
 fi
 
+# Linking local.nix
+cp .config/nixpkgs/local.template.nix $HOME/local.nix
+ln -s $HOME/local.nix .config/nixpkgs/local.nix
+
 home-manager switch
 
 if [[ ! $SHELL =~ "zsh$" ]]; then
