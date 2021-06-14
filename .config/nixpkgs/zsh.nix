@@ -59,6 +59,9 @@
     ];
     shellAliases = {
       ls = "exa";
+      lst = "exa -TL2";
+      lsg = "exa --git-ignore";
+      lstg = "exa -TL2 --git-ignore";
       ical = "icalBuddy";
       icaln = "icalBuddy -n";
       icalt = "icalBuddy eventsToday";
