@@ -20,12 +20,8 @@
     dvtm
   ];
 
-  programs.home-manager = {
-    enable = true;
-    path = "…";
-  };
+  programs.home-manager.enable = true;
+  programs.home-manager.path = "…";
 
-  programs.bat.themes = {
-    dracula = "$HOME/.bat-themes/Dracula.tmTheme";
-  };
+  programs.bat.themes.dracula = "$HOME/.bat-themes/Dracula.tmTheme";
 }

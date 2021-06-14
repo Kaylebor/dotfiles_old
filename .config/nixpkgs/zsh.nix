@@ -1,34 +1,40 @@
 { pkgs, ... }: {
-  programs.zsh = {
-    enable = true;
-    enableAutosuggestions = true;
-    history = {
-      expireDuplicatesFirst = true;
-      extended = true;
-      ignoreDups = true;
-      save = 10000;
-      size = 10000;
-    };
-    enableCompletion = true;
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-        "asdf"
-        "extract"
-        "cp"
-        "fd"
-        "fzf"
-        "ripgrep"
-        "ssh-agent"
-      ];
-      extraConfig =
-      "
-      zstyle :omz:plugins:ssh-agent identities id_ed25519
-      ";
-      theme = "dracula";
-      custom = "$HOME/.oh-my-zsh";
-    };
-    plugins = [
+  programs.zsh.enable = true;
+  programs.zsh.enableAutosuggestions = true;
+  programs.zsh.enableCompletion = true;
+
+  programs.zsh.history.expireDuplicatesFirst = true;
+  programs.zsh.history.extended = true;
+  programs.zsh.history.ignoreDups = true;
+  programs.zsh.history.save = 10000;
+  programs.zsh.history.size = 10000;
+
+  programs.zsh.shellAliases.ls = "exa";
+  programs.zsh.shellAliases.lst = "exa -TL2";
+  programs.zsh.shellAliases.lsg = "exa --git-ignore";
+  programs.zsh.shellAliases.lstg = "exa -TL2 --git-ignore";
+
+  programs.zsh.sessionVariables.LC_ALL="en_US.UTF-8";
+  programs.zsh.sessionVariables.LANG="C.UTF-8";
+  programs.zsh.sessionVariables.MANPAGER="sh -c 'col -bx | bat -l man -p'";
+  programs.zsh.sessionVariables.RIPGREP_CONFIG_PATH="$HOME/.ripgreprc";
+  programs.zsh.sessionVariables.BAT_THEME="Dracula";
+
+  programs.zsh.oh-my-zsh.enable = true;
+  programs.zsh.oh-my-zsh.plugins = [
+    "asdf"
+    "extract"
+    "cp"
+    "fd"
+    "fzf"
+    "ripgrep"
+    "ssh-agent"
+  ];
+  programs.zsh.oh-my-zsh.extraConfig = "zstyle :omz:plugins:ssh-agent identities id_ed25519";
+  programs.zsh.oh-my-zsh.theme = "dracula";
+  programs.zsh.oh-my-zsh.custom = "$HOME/.oh-my-zsh";
+
+  programs.zsh.plugins = [
       {
         name = "zsh-autosuggestions";
         src = pkgs.fetchFromGitHub {
@@ -57,47 +63,8 @@
         };
       }
     ];
-    shellAliases = {
-      ls = "exa";
-      lst = "exa -TL2";
-      lsg = "exa --git-ignore";
-      lstg = "exa -TL2 --git-ignore";
-      ical = "icalBuddy";
-      icaln = "icalBuddy -n";
-      icalt = "icalBuddy eventsToday";
-      icaltn = "icalBuddy -n eventsToday";
-    };
-    sessionVariables = {
-      LC_ALL="en_US.UTF-8";
-      LANG="C.UTF-8";
-      MANPAGER="sh -c 'col -bx | bat -l man -p'";
-      RIPGREP_CONFIG_PATH="$HOME/.ripgreprc";
-      BAT_THEME="Dracula";
-    };
-    initExtraBeforeCompInit = "
-      path+=/usr/local/sbin
-    ";
-    initExtra = "
-      source_files=(
-        $HOME/.localenv
-        $HOME/.scripts/zsh/funcs.zsh
-        $HOME/.scripts/zsh/keybindings-fix.zsh
-        $HOME/.nix-profile/etc/profile.d/nix.sh
-        $HOME/.asdf/asdf.sh
-        $HOME/.asdf/plugins/java/set-java-home.zsh
-        $HOME/.iterm2_shell_integration.zsh
-      )
 
-      for file in $source_files; do
-        [[ -e $file ]] && source $file
-      done
-      
-      unset source_files
+  programs.zsh.initExtraBeforeCompInit = "path+=/usr/local/sbin";
 
-      if [[ -n $(command -v op) ]]; then
-        eval \"$(op completion zsh)\"
-        compdef _op op
-      fi
-      ";
-  };
+  programs.zsh.initExtra = "source $HOME/.scripts/zsh/initExtra.zsh";
 }
