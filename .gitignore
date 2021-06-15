@@ -29,3 +29,4 @@ Temporary Items
 # Project-specific ignores
 .dracula
 .config/nixpkgs/local.nix
+.scripts/zsh/local.zsh

@@ -1,9 +1,9 @@
 #!/bin/zsh
 
 source_files=(
-  $HOME/.localenv
   $HOME/.scripts/zsh/funcs.zsh
   $HOME/.scripts/zsh/keybindings-fix.zsh
+  $HOME/.local.zsh
   $HOME/.nix-profile/etc/profile.d/nix.sh
   $HOME/.asdf/asdf.sh
   $HOME/.asdf/plugins/java/set-java-home.zsh

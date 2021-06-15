@@ -1,78 +1,136 @@
 #!/bin/bash
-FILES_TO_LINK=(.tool-versions .default-python-packages .scripts .ripgreprc .config/nixpkgs .config/git/.gitignore.global)
+FILES_TO_LINK=(.tool-versions .default-python-packages .default-gems .scripts .ripgreprc .config/nixpkgs .config/git/.gitignore.global)
 
-cd $(dirname -- "$0")
-DIR="$(pwd)"
+DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
-Help() {
+function Help {
   echo "Installs and configures the dotfiles, as seen in README.md"
   echo ""
   echo "Usage: $0"
   echo "options:"
-  echo "  -h, --help                    displays this message"
+  echo "  -h, --help    displays this message"
+  echo "  --git-email   global git configuration email"
+  echo "  --git-name    global git configuration name"
   exit $1
 }
 
-for arg in "$@"; do
-  case $arg in
-    -h|--help)
+function MissingOptionError {
+  echo "Option $1 must be present; aborting"
+  exit -1
+}
+
+while getopts "h-:" optchar; do
+  case $optchar in
+  -)
+    case $OPTARG in
+    git-email)
+      git_email="${!OPTIND}"
+      ;;
+    git-email=*)
+      git_email=${OPTARG#*=}
+      ;;
+    git-name)
+      git_name="${!OPTIND}"
+      ;;
+    git-name=*)
+      git_name=${OPTARG#*=}
+      ;;
+    help)
+      Help 0
+      ;;
+    esac
+    ;;
+  h)
     Help 0
     ;;
   esac
 done
 
-[[ ! -d "$HOME/.backups" ]] && mkdir -p "$HOME/.backups"
+if [[ -z $git_email ]]; then
+  MissingOptionError git-email
+fi
+if [[ -z $git_name ]]; then
+  MissingOptionError git-name
+fi
+
+[[ ! -d $HOME/.backups ]] && mkdir -p $HOME/.backups
 for file in ${FILES_TO_LINK[@]}; do
-  [[ -e "$HOME/$file" ]] && mv "$HOME/$file" "$HOME/.backups/"
-  ln -s "$DIR/$file" "$HOME/$file"
+  [[ -e $HOME/$file ]] && mv $HOME/$file $HOME/.backups/
+  ln -s $DIR/$file $HOME/$file
 done
 
 # Installing nix
-if ! command -v nix-env > /dev/null; then
+if ! command -v nix-env >/dev/null; then
   unameOut="$(uname -s)"
   case "${unameOut}" in
-    Darwin*) bash <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume;;
-    *)       bash <(curl -L https://nixos.org/nix/install)
+  Darwin*) bash <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume ;;
+  *) bash <(curl -L https://nixos.org/nix/install) ;;
   esac
   if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
     . "$HOME/.nix-profile/etc/profile.d/nix.sh"
   fi
 fi
 
+# Creating local.zsh file
+cp $DIR/.scripts/zsh/local.template.zsh $HOME/.local.zsh
+[[ -e $DIR/.scripts/zsh/local.zsh ]] && rm $DIR/.scripts/zsh/local.zsh
+ln -s $HOME/.local.zsh $DIR/.scripts/zsh/local.zsh
+
 # Installing Home Manager
-if ! command -v home-manager > /dev/null; then
+if ! command -v home-manager >/dev/null; then
   nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
   nix-channel --update
   nix-shell '<home-manager>' -A install
 fi
 
 # Linking local.nix
-cp .config/nixpkgs/local.template.nix $HOME/local.nix
-ln -s $HOME/local.nix .config/nixpkgs/local.nix
+cp $DIR/.config/nixpkgs/local.template.nix $HOME/.local.nix
+sed -i "s/#EMAIL/$git_email/g" $HOME/.local.nix
+sed -i "s/#NAME/$git_name/g" $HOME/.local.nix
+[[ -e $DIR/.config/nixpkgs/local.nix ]] && rm $DIR/.config/nixpkgs/local.nix
+ln -s $HOME/.local.nix $DIR/.config/nixpkgs/local.nix
 
 home-manager switch
 
 if [[ ! $SHELL =~ "zsh$" ]]; then
-  [[ ! $(grep "$HOME/.nix-profile/bin/zsh" /etc/shells) ]] && echo "$HOME/.nix-profile/bin/zsh" | sudo tee -a /etc/shells
-  chsh $USER -s "$HOME/.nix-profile/bin/zsh"
+  [[ ! $(grep $HOME/.nix-profile/bin/zsh /etc/shells) ]] && echo $HOME/.nix-profile/bin/zsh | sudo tee -a /etc/shells
+  chsh $USER -s $HOME/.nix-profile/bin/zsh
 fi
 
 # Installing asdf
-if ! command -v asdf > /dev/null; then
-  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
+if ! command -v asdf >/dev/null; then
+  git clone https://github.com/asdf-vm/asdf.git $HOME/.asdf --branch v0.8.0
 fi
 
 # Installing asdf languages
 asdf install
 
 # Installing Dracula ZSH theme
-git clone https://github.com/dracula/zsh.git .dracula/zsh
+[[ ! -d $DIR/.dracula ]] && mkdir -p $DIR/.dracula
+if [[ -d $DIR/.dracula/zsh ]]; then
+  git -C $DIR/.dracula/zsh pull
+else
+  git clone https://github.com/dracula/zsh.git $DIR/.dracula/zsh
+fi
+[[ -e $HOME/.oh-my-zsh/themes/dracula.zsh-theme ]] && rm $HOME/.oh-my-zsh/themes/dracula.zsh-theme
 ln -s $DIR/.dracula/zsh/dracula.zsh-theme $HOME/.oh-my-zsh/themes/dracula.zsh-theme
 
 # Installing Dracula Sublime theme (for bat)
-mkdir -p $HOME/.bat-themes
-git clone https://github.com/dracula/sublime.git .dracula/sublime
+if [[ -d $DIR/.dracula/sublime ]]; then
+  git -C $DIR/.dracula/sublime pull
+else
+  git clone https://github.com/dracula/sublime.git $DIR/.dracula/sublime
+fi
+[[ ! -d $HOME/.bat-themes ]] && mkdir -p $HOME/.bat-themes
+[[ -e $HOME/.bat-themes/Dracula.tmTheme ]] && rm $HOME/.bat-themes/Dracula.tmTheme
 ln -s $DIR/.dracula/sublime/Dracula.tmTheme $HOME/.bat-themes/Dracula.tmTheme
 
+# Cleanup
+unset FILES_TO_LINK
+unset DIR
+unset git_email
+unset git_name
+
+source $HOME/.zshrc
 
 echo "Finished; you may have to reopen the shell, or source .zshrc again"
