@@ -29,3 +29,5 @@ Temporary Items
 
 .mix_tasks
 .rake_tasks
+.autoenv.zsh
+.autoenv_leave.zsh
