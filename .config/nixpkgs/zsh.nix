@@ -19,11 +19,9 @@
   programs.zsh.sessionVariables.MANPAGER="sh -c 'col -bx | bat -l man -p'";
   programs.zsh.sessionVariables.RIPGREP_CONFIG_PATH="$HOME/.ripgreprc";
   programs.zsh.sessionVariables.BAT_THEME="Dracula";
-  programs.zsh.sessionVariables.ZSH_DOTENV_FILE=".myenv";
 
   programs.zsh.oh-my-zsh.enable = true;
   programs.zsh.oh-my-zsh.plugins = [
-    "dotenv"
     "asdf"
     "adb"
     "extract"
@@ -57,8 +55,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "zsh-users";
           repo = "zsh-autosuggestions";
-          rev = "v0.6.4";
-          sha256 = "0h52p2waggzfshvy1wvhj4hf06fmzd44bv6j18k3l9rcx6aixzn6";
+          rev = "v0.7.0";
+          sha256 = "1g3pij5qn2j7v7jjac2a63lxd97mcsgw6xq6k5p7835q9fjiid98";
         };
       }
       {
@@ -75,8 +73,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "zsh-users";
           repo = "zsh-completions";
-          rev = "0.31.0";
-          sha256 = "0rw23m8cqxhcb4yjhbzb9lir60zn1xjy7hn3zv1fzz700f0i6fyk";
+          rev = "0.33.0";
+          sha256 = "0vs14n29wvkai84fvz3dz2kqznwsq2i5fzbwpv8nsfk1126ql13i";
         };
       }
     ];
