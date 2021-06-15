@@ -13,6 +13,11 @@ function sort-uniq {
   fi
 }
 
+function update-dracula-themes {
+  local dracula_path="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"/.dracula/
+  ls -d -1 "$dracula_path"**/ | parallel git -C {} pull
+}
+
 function html-search {
   local search_tags_count=0
   local regex=()
