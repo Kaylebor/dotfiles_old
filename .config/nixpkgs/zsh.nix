@@ -40,7 +40,6 @@
     "urltools"
     "web-search"
     "zsh-interactive-cd"
-    "zsh_reload"
   ];
   programs.zsh.oh-my-zsh.extraConfig = "
   zstyle :omz:plugins:ssh-agent identities id_ed25519
@@ -75,6 +74,16 @@
           repo = "zsh-completions";
           rev = "0.33.0";
           sha256 = "0vs14n29wvkai84fvz3dz2kqznwsq2i5fzbwpv8nsfk1126ql13i";
+        };
+      }
+      {
+        name = "zsh-autoenv";
+        file = "autoenv.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "Tarrasch";
+          repo = "zsh-autoenv";
+          rev = "e9809c1bd28496e025ca05576f574e08e93e12e8";
+          sha256 = "1vcfk9g26zqn6l7pxjqidw8ay3yijx95ij0d7mns8ypxvaax242b";
         };
       }
     ];
