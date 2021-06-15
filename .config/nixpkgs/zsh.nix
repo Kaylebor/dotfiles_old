@@ -19,18 +19,35 @@
   programs.zsh.sessionVariables.MANPAGER="sh -c 'col -bx | bat -l man -p'";
   programs.zsh.sessionVariables.RIPGREP_CONFIG_PATH="$HOME/.ripgreprc";
   programs.zsh.sessionVariables.BAT_THEME="Dracula";
+  programs.zsh.sessionVariables.ZSH_DOTENV_FILE=".myenv";
 
   programs.zsh.oh-my-zsh.enable = true;
   programs.zsh.oh-my-zsh.plugins = [
+    "dotenv"
     "asdf"
+    "adb"
     "extract"
+    "command-not-found"
     "cp"
     "fd"
     "fzf"
+    "httpie"
     "ripgrep"
     "ssh-agent"
+    "mix-fast"
+    "rake-fast"
+    "npm"
+    "rebar"
+    "timer"
+    "urltools"
+    "web-search"
+    "zsh-interactive-cd"
+    "zsh_reload"
   ];
-  programs.zsh.oh-my-zsh.extraConfig = "zstyle :omz:plugins:ssh-agent identities id_ed25519";
+  programs.zsh.oh-my-zsh.extraConfig = "
+  zstyle :omz:plugins:ssh-agent identities id_ed25519
+  zstyle ':completion:*:*:docker:*' option-stacking yes
+  zstyle ':completion:*:*:docker-*:*' option-stacking yes";
   programs.zsh.oh-my-zsh.theme = "dracula";
   programs.zsh.oh-my-zsh.custom = "$HOME/.oh-my-zsh";
 

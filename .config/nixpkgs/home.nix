@@ -18,6 +18,7 @@
     gitAndTools.delta
     abduco
     dvtm
+    httpie
   ];
 
   programs.home-manager.enable = true;
