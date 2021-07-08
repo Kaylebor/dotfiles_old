@@ -19,6 +19,7 @@
   programs.zsh.sessionVariables.MANPAGER="sh -c 'col -bx | bat -l man -p'";
   programs.zsh.sessionVariables.RIPGREP_CONFIG_PATH="$HOME/.ripgreprc";
   programs.zsh.sessionVariables.BAT_THEME="Dracula";
+  programs.zsh.sessionVariables.FZF_TMUX="1";
 
   programs.zsh.oh-my-zsh.enable = true;
   programs.zsh.oh-my-zsh.plugins = [

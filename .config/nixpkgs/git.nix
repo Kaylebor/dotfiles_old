@@ -2,10 +2,13 @@
   programs.git.enable = true;
   programs.git.delta.enable = true;
 
+  programs.git.aliases.aliases = "config --get-regexp alias";
+
   programs.git.aliases.s = "status";
   programs.git.aliases.s-c = "status --column";
   programs.git.aliases.ss = "status -s";
   programs.git.aliases.a = "add";
+  programs.git.aliases.a-i = "add -i";
   programs.git.aliases.c = "commit";
   programs.git.aliases.c-a = "commit -a";
   programs.git.aliases.c-m = "commit -m";
@@ -21,6 +24,10 @@
   programs.git.aliases.m-s = "merge --squash";
   programs.git.aliases.r = "rebase";
   programs.git.aliases.r-i = "rebase -i";
+
+  programs.git.aliases.rg = "!git branch -a | sed '/->/d' | sed 's/\\*//' | xargs git grep -n -I";
+  programs.git.aliases.hist = "log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short";
+  programs.git.aliases.last = "log -1 head";
   programs.git.aliases.list-local = "for-each-ref --format '%(refname:short) %(upstream:track)' refs/heads";
   programs.git.aliases.list-gone = "!git list-local | awk '$2 == \"[gone]\" {print $1}'";
   programs.git.aliases.del-gone = "!git list-gone | xargs -r git branch -D";
