@@ -1,22 +1,17 @@
 { pkgs, ... }: {
-  
   programs.neovim = {
     enable = true;
+
+    viAlias = true;
+    vimAlias = true;
+    
     plugins = with pkgs.vimPlugins; [
       fzf-vim
-      { plugin = ale;
-        config = "
-        let g:ale_completion_enabled=1
-        let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'] }
-        "; }
+      YouCompleteMe
       { plugin = vim-airline;
-        config = "
-          let g:airline#extensions#ale#enabled=1
-        "; }
+        config = "let g:airline#extensions#ale#enabled=1"; }
       { plugin = vim-airline-themes;
-        config = "
-          let g:airline_theme='luna'
-        "; }
+        config = "let g:airline_theme='luna'"; }
       { plugin = nerdtree;
         config = "
           \" NERDTree window width
@@ -27,9 +22,14 @@
           \" open NERDTree with Ctrl+n
           map <C-n> :NERDTreeToggle<CR>
         "; }
+      { plugin = vim-ruby; }
+      { plugin = vim-elixir; }
+      { plugin = vim-nix; }
+      { plugin = vim-javascript; }
       nerdtree-git-plugin
       dracula-vim
     ];
+
     extraConfig = "
       set number
       set hlsearch
@@ -50,5 +50,4 @@
       nnoremap gl <C-W><C-L>
     ";
   };
-
 }

@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+exa -1 --colour=never $HOME/.scripts/zsh/zsh-functions

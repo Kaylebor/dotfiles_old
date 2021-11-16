@@ -1,5 +1,14 @@
 #!/bin/bash
-FILES_TO_LINK=(.tool-versions .default-python-packages .default-gems .scripts .ripgreprc .config/nixpkgs .config/git/.gitignore.global)
+FILES_TO_LINK=(
+  .tool-versions
+  .default-python-packages
+  .default-gems
+  .scripts
+  .ripgreprc
+  .dracula
+  .config/nixpkgs
+  .config/git/.gitignore.global
+)
 
 DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
@@ -46,6 +55,7 @@ while getopts "h-:" optchar; do
   esac
 done
 
+# Check mandatory values
 if [[ -z $git_email ]]; then
   MissingOptionError git-email
 fi
@@ -53,15 +63,18 @@ if [[ -z $git_name ]]; then
   MissingOptionError git-name
 fi
 
+# Global variables
+unameOut="$(uname -s)"    # Used to differentiate Mac from other UNIX-like systems
+
 [[ ! -d $HOME/.backups ]] && mkdir -p $HOME/.backups
 for file in ${FILES_TO_LINK[@]}; do
-  [[ -e $HOME/$file ]] && mv $HOME/$file $HOME/.backups/
-  ln -s $DIR/$file $HOME/$file
+  [[ -e "$HOME/$file" ]] && mv "$HOME/$file" "$HOME/.backups/"
+  ln -s "$DIR/$file" "$HOME/$file"
 done
+unset file
 
 # Installing nix
 if ! command -v nix-env >/dev/null; then
-  unameOut="$(uname -s)"
   case "${unameOut}" in
   Darwin*) bash <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume ;;
   *) bash <(curl -L https://nixos.org/nix/install) ;;
@@ -72,16 +85,9 @@ if ! command -v nix-env >/dev/null; then
 fi
 
 # Creating local.zsh file
-cp $DIR/.scripts/zsh/local.template.zsh $HOME/.local.zsh
-[[ -e $DIR/.scripts/zsh/local.zsh ]] && rm $DIR/.scripts/zsh/local.zsh
-ln -s $HOME/.local.zsh $DIR/.scripts/zsh/local.zsh
-
-# Installing Home Manager
-if ! command -v home-manager >/dev/null; then
-  nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-  nix-channel --update
-  nix-shell '<home-manager>' -A install
-fi
+cp "$DIR/.scripts/zsh/local.template.zsh" "$HOME/.local.zsh"
+[[ -e "$DIR/.scripts/zsh/local.zsh" ]] && rm "$DIR/.scripts/zsh/local.zsh"
+ln -s "$HOME/.local.zsh" "$DIR/.scripts/zsh/local.zsh"
 
 # Linking local.nix
 cp $DIR/.config/nixpkgs/local.template.nix $HOME/.local.nix
@@ -90,11 +96,17 @@ sed -i "s/#NAME/$git_name/g" $HOME/.local.nix
 [[ -e $DIR/.config/nixpkgs/local.nix ]] && rm $DIR/.config/nixpkgs/local.nix
 ln -s $HOME/.local.nix $DIR/.config/nixpkgs/local.nix
 
-home-manager switch
+# Installing Home Manager
+if ! command -v home-manager >/dev/null; then
+  nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+  nix-channel --update
+  nix-shell '<home-manager>' -A install
+fi
 
-if [[ ! $SHELL =~ "zsh$" ]]; then
-  [[ ! $(grep $HOME/.nix-profile/bin/zsh /etc/shells) ]] && echo $HOME/.nix-profile/bin/zsh | sudo tee -a /etc/shells
-  chsh $USER -s $HOME/.nix-profile/bin/zsh
+if [[ ! "${SHELL##*/}" == "zsh" ]]; then
+  SHELL=$HOME/.nix-profile/bin/zsh
+  [[ ! $(grep $SHELL /etc/shells) ]] && echo $SHELL | sudo tee -a /etc/shells
+  chsh $USER -s $SHELL
 fi
 
 # Installing asdf
@@ -104,6 +116,25 @@ fi
 
 # Installing asdf languages
 asdf install
+
+# Installing Brew and packages (Mac)
+if [[ "${unameOut}" == "Darwin" && -z "$(command -v brew)" ]]; do
+  if [[ -z "$(command -v xcode-select)" ]]; do
+    echo "Brew could not be installed because Xcode is missing"
+    echo "Check Brew homepage for more information:"
+    echo "https://docs.brew.sh/Installation"
+  else
+    xcode-select --install
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  fi
+fi
+
+# Installing extra tools
+# if [[ -z "$(command -v cht.sh)"]]; do
+  # curl https://cht.sh/:cht.sh > /usr/local/sbin/cht.sh
+  # chmod +x /usr/local/sbin/cht.sh
+  # curl cheat.sh/:bash_completion > /usr/local/share/zsh/site-functions/cht.sh
+# fi
 
 # Installing Dracula ZSH theme
 [[ ! -d $DIR/.dracula ]] && mkdir -p $DIR/.dracula
@@ -130,7 +161,9 @@ unset FILES_TO_LINK
 unset DIR
 unset git_email
 unset git_name
+unset unameOut
 
-source $HOME/.zshrc
+echo "Finished; you may have to reopen the shell, source .zshrc again, or run 'exec -l \$SHELL'"
+echo "Running 'exec -l \$SHELL' now"
 
-echo "Finished; you may have to reopen the shell, or source .zshrc again"
+exec -l $SHELL

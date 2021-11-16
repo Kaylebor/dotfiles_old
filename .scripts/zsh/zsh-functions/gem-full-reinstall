@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+local DIR=$PWD
+cd $HOME
+gem uninstall --all --ignore-dependencies --executables
+gem cleanup
+gem install bundler rubocop solargraph pry
+cd $DIR

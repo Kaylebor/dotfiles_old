@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+asdf list all java | cut -d'-' -f1 | sort -u

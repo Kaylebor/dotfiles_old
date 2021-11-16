@@ -3,6 +3,7 @@
     ./git.nix
     ./zsh.nix
     ./neovim.nix
+    ./tmux.nix
     ./local.nix
   ];
   
@@ -10,22 +11,39 @@
     exa
     hexyl
     fd
+    wget
     ripgrep
     ripgrep-all
     bat
     fzf
-    direnv
     gitAndTools.delta
     abduco
     dvtm
     httpie
+    parallel
+    shellcheck
+    visidata
   ];
 
-  programs.fzf.enable = true;
-  programs.fzf.enableZshIntegration = true;
+  programs.topgrade = {
+    enable = true;
+    settings = {
+      disable = [
+        "node"
+        "shell"
+      ];
+    };
+  };
 
-  programs.home-manager.enable = true;
-  programs.home-manager.path = "…";
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.home-manager = {
+    enable = true;
+    path = "…";
+  };
 
   programs.bat.themes.dracula = "$HOME/.bat-themes/Dracula.tmTheme";
 }

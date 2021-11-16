@@ -30,3 +30,4 @@ Temporary Items
 .dracula
 .config/nixpkgs/local.nix
 .scripts/zsh/local.zsh
+.scripts/zsh/local.funcs.zsh

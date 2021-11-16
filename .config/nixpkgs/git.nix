@@ -1,47 +1,70 @@
 { pkgs, ... }: {
-  programs.git.enable = true;
-  programs.git.delta.enable = true;
+  programs.git = {
+    enable = true;
+    delta.enable = true;
 
-  programs.git.aliases.aliases = "config --get-regexp alias";
+    aliases = {
+      aliases = "config --get-regexp alias";
 
-  programs.git.aliases.s = "status";
-  programs.git.aliases.s-c = "status --column";
-  programs.git.aliases.ss = "status -s";
-  programs.git.aliases.a = "add";
-  programs.git.aliases.a-i = "add -i";
-  programs.git.aliases.c = "commit";
-  programs.git.aliases.c-a = "commit -a";
-  programs.git.aliases.c-m = "commit -m";
-  programs.git.aliases.c-am = "commit -am";
-  programs.git.aliases.c--am = "commit --amend";
-  programs.git.aliases.c-i = "commit --interactive";
-  programs.git.aliases.c-p = "commit -p";
-  programs.git.aliases.co = "checkout";
-  programs.git.aliases.p = "pull";
-  programs.git.aliases.f = "fetch";
-  programs.git.aliases.ps = "push";
-  programs.git.aliases.m = "merge";
-  programs.git.aliases.m-s = "merge --squash";
-  programs.git.aliases.r = "rebase";
-  programs.git.aliases.r-i = "rebase -i";
+      s = "status";
+      s-c = "status --column";
+      ss = "status -s";
+      a = "add";
+      a-i = "add -i";
+      c = "commit";
+      c-a = "commit -a";
+      c-m = "commit -m";
+      c-am = "commit -am";
+      c--am = "commit --amend";
+      c-i = "commit --interactive";
+      c-p = "commit -p";
+      b = "branch";
+      bd = "branch -d";
+      bv = "branch -v";
+      bvv = "branch -vv";
+      ba = "branch -a";
+      co = "checkout";
+      cob = "checkout -b";
+      p = "pull";
+      f = "fetch";
+      ps = "push";
+      psf = "push --force-with-lease";
+      psu = "push -u";
+      psuo = "push -u origin HEAD";
+      m = "merge";
+      m-s = "merge --squash";
+      r = "rebase";
+      r-i = "rebase -i";
+      l = "log";
 
-  programs.git.aliases.rg = "!git branch -a | sed '/->/d' | sed 's/\\*//' | xargs git grep -n -I";
-  programs.git.aliases.hist = "log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short";
-  programs.git.aliases.last = "log -1 head";
-  programs.git.aliases.list-local = "for-each-ref --format '%(refname:short) %(upstream:track)' refs/heads";
-  programs.git.aliases.list-gone = "!git list-local | awk '$2 == \"[gone]\" {print $1}'";
-  programs.git.aliases.del-gone = "!git list-gone | xargs -r git branch -D";
-  programs.git.aliases.bl-date = "for-each-ref --sort='-committerdate:iso8601' --format=' %(committerdate:iso8601)%09%(refname)' refs/heads";
-  programs.git.aliases.blr-date = "for-each-ref --sort='-committerdate:iso8601' --format=' %(committerdate:iso8601)%09%(refname)' refs/remotes";
-  programs.git.aliases.bl-author = "!git for-each-ref --sort='-committerdate:iso8601' --format='%(committerdate:relative)|%(refname:short)|%(committername)' refs/heads/ | column -s '|' -t";
-  programs.git.aliases.blr-author = "!git for-each-ref --sort='-committerdate:iso8601' --format='%(committerdate:relative)|%(refname:short)|%(committername)' refs/remotes/ | column -s '|' -t";
+      rg = "!git branch -a | sed '/->/d' | sed 's/\\*//' | xargs git grep -n -I";
+      hist = "log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short";
+      last = "log -1 head";
+      list-local = "for-each-ref --format '%(refname:short) %(upstream:track)' refs/heads";
+      list-gone = "!git list-local | awk '$2 == \"[gone]\" {print $1}'";
+      del-gone = "!git list-gone | xargs -r git branch -D";
+      bl-date = "for-each-ref --sort='-committerdate:iso8601' --format=' %(committerdate:iso8601)%09%(refname)' refs/heads";
+      blr-date = "for-each-ref --sort='-committerdate:iso8601' --format=' %(committerdate:iso8601)%09%(refname)' refs/remotes";
+      bl-author = "!git for-each-ref --sort='-committerdate:iso8601' --format='%(committerdate:relative)|%(refname:short)|%(committername)' refs/heads/ | column -s '|' -t";
+      blr-author = "!git for-each-ref --sort='-committerdate:iso8601' --format='%(committerdate:relative)|%(refname:short)|%(committername)' refs/remotes/ | column -s '|' -t";
+    };
 
-  programs.git.extraConfig.core.editor = "code -w";
-  programs.git.extraConfig.core.eol = "lf";
-  programs.git.extraConfig.core.autocrlf = "input";
-  programs.git.extraConfig.core.excludesfile = "~/.config/git/.gitignore.global";
+    extraConfig = {
+      core = {
+        editor = "code -w";
+        eol = "lf";
+        autocrlf = "input";
+        excludesfile = "~/.config/git/.gitignore.global";
+      };
 
-  programs.git.extraConfig.commit.template = "~/.config/git/.gitmessage";
-  programs.git.extraConfig.branch.autosetupmerge = "always";
-  programs.git.extraConfig.pull.ff = "only";
+      log.date = "relative";
+      format.pretty = "%C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%>(12,trunc)%ad %C(auto,green)%<(9,trunc)%aN%C(auto,reset)%s%C(auto,red)% gD% D";
+
+      branch.autosetupmerge = "always";
+      pull.ff = "only";
+      push.default = "simple";
+
+      difftool.prompt = "false";
+    };
+  };
 }

@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+curl cht.sh/$1

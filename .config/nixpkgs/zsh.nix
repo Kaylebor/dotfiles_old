@@ -1,55 +1,66 @@
 { pkgs, ... }: {
-  programs.zsh.enable = true;
-  programs.zsh.enableAutosuggestions = true;
-  programs.zsh.enableCompletion = true;
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions = true;
+    enableCompletion = true;
 
-  programs.zsh.history.expireDuplicatesFirst = true;
-  programs.zsh.history.extended = true;
-  programs.zsh.history.ignoreDups = true;
-  programs.zsh.history.save = 10000;
-  programs.zsh.history.size = 10000;
+    history = {
+      expireDuplicatesFirst = true;
+      extended = true;
+      ignoreDups = true;
+      save = 10000;
+      size = 10000;
+    };
 
-  programs.zsh.shellAliases.ls = "exa";
-  programs.zsh.shellAliases.lst = "exa -TL2";
-  programs.zsh.shellAliases.lsg = "exa --git-ignore";
-  programs.zsh.shellAliases.lstg = "exa -TL2 --git-ignore";
+    shellAliases = {
+      g = "git";
+      exa = "exa -h -L2 --icons";
+      ls = "exa";
+      lsg = "exa --git-ignore";
+    };
 
-  programs.zsh.sessionVariables.LC_ALL="en_US.UTF-8";
-  programs.zsh.sessionVariables.LANG="C.UTF-8";
-  programs.zsh.sessionVariables.MANPAGER="sh -c 'col -bx | bat -l man -p'";
-  programs.zsh.sessionVariables.RIPGREP_CONFIG_PATH="$HOME/.ripgreprc";
-  programs.zsh.sessionVariables.BAT_THEME="Dracula";
-  programs.zsh.sessionVariables.FZF_TMUX="1";
+    sessionVariables = {
+      LC_ALL="en_US.UTF-8";
+      LANG="C.UTF-8";
+      MANPAGER="sh -c 'col -bx | bat -l man -p'";
+      RIPGREP_CONFIG_PATH="$HOME/.ripgreprc";
+      BAT_THEME="Dracula";
+      FZF_TMUX="1";
+      ERL_AFLAGS="-kernel shell_history enabled";
+      DISABLE_AUTO_TITLE="true";
+      TIME_STYLE="long-iso";
+    };
 
-  programs.zsh.oh-my-zsh.enable = true;
-  programs.zsh.oh-my-zsh.plugins = [
-    "asdf"
-    "adb"
-    "extract"
-    "command-not-found"
-    "cp"
-    "fd"
-    "fzf"
-    "httpie"
-    "ripgrep"
-    "ssh-agent"
-    "mix-fast"
-    "rake-fast"
-    "npm"
-    "rebar"
-    "timer"
-    "urltools"
-    "web-search"
-    "zsh-interactive-cd"
-  ];
-  programs.zsh.oh-my-zsh.extraConfig = "
-  zstyle :omz:plugins:ssh-agent identities id_ed25519
-  zstyle ':completion:*:*:docker:*' option-stacking yes
-  zstyle ':completion:*:*:docker-*:*' option-stacking yes";
-  programs.zsh.oh-my-zsh.theme = "dracula";
-  programs.zsh.oh-my-zsh.custom = "$HOME/.oh-my-zsh";
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "asdf"
+        "adb"
+        "extract"
+        "command-not-found"
+        "cp"
+        "fd"
+        "fzf"
+        "httpie"
+        "ripgrep"
+        "mix-fast"
+        "rake-fast"
+        "npm"
+        "rebar"
+        "timer"
+        "urltools"
+        "web-search"
+        "zsh-interactive-cd"
+      ];
+      extraConfig = "
+      zstyle ':completion:*:*:docker:*' option-stacking yes
+      zstyle ':completion:*:*:docker-*:*' option-stacking yes
+      ";
+      theme = "dracula";
+      custom = "$HOME/.oh-my-zsh";
+    };
 
-  programs.zsh.plugins = [
+    plugins = [
       {
         name = "zsh-autosuggestions";
         src = pkgs.fetchFromGitHub {
@@ -62,7 +73,7 @@
       {
         name = "fast-syntax-highlighting";
         src = pkgs.fetchFromGitHub {
-          owner = "zdharma";
+          owner = "zdharma-continuum";
           repo = "fast-syntax-highlighting";
           rev = "v1.55";
           sha256 = "0h7f27gz586xxw7cc0wyiv3bx0x3qih2wwh05ad85bh2h834ar8d";
@@ -89,7 +100,7 @@
       }
     ];
 
-  programs.zsh.initExtraBeforeCompInit = "path+=/usr/local/sbin";
-
-  programs.zsh.initExtra = "source $HOME/.scripts/zsh/initExtra.zsh";
+    envExtra = "source $HOME/.scripts/zsh/envExtra.zsh";
+    initExtra = "source $HOME/.scripts/zsh/initExtra.zsh";
+  };
 }

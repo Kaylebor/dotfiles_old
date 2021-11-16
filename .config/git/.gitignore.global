@@ -31,3 +31,5 @@ Temporary Items
 .rake_tasks
 .autoenv.zsh
 .autoenv_leave.zsh
+
+.vscode

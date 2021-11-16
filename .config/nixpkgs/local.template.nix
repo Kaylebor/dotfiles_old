@@ -1,4 +1,6 @@
 { pkgs, ... }: {
-  programs.git.userEmail = "#EMAIL";
-  programs.git.userName = "#NAME";
+  programs.git = {
+    userEmail = "#EMAIL";
+    userName = "#NAME";
+  };
 }
