@@ -23,6 +23,7 @@
     parallel
     shellcheck
     visidata
+    nixfmt
   ];
 
   programs.topgrade = {
