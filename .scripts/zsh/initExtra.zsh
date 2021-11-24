@@ -9,10 +9,11 @@ local source_files=(
   $HOME/.scripts/zsh/keybindings-fix.zsh
   $HOME/.nix-profile/etc/profile.d/nix.sh
   $HOME/.asdf/asdf.sh
-  $HOME/.asdf/plugins/java/set-java-home.zsh
   $HOME/.iterm2_shell_integration.zsh
   $HOME/.local.zsh
 )
+
+export $(asdf env java | grep JAVA_HOME)
 
 for file in $source_files
   [[ -e $file ]] && source $file
