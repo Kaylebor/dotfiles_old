@@ -1,5 +1,6 @@
 #!/bin/bash
 FILES_TO_LINK=(
+  .asdfrc
   .tool-versions
   .default-python-packages
   .default-gems
