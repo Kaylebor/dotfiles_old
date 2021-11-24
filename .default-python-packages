@@ -3,3 +3,4 @@ PyJWT
 isort
 nose
 pytest
+python-lsp-server
