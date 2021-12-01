@@ -51,7 +51,7 @@
 
     extraConfig = {
       core = {
-        editor = "code -w";
+        editor = "nvim";
         eol = "lf";
         autocrlf = "input";
         excludesfile = "~/.config/git/.gitignore.global";
