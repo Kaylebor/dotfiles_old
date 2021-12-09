@@ -27,6 +27,9 @@ if [[ -n $(command -v op) ]]; then
   compdef _op op
 fi
 
+# Disable history expansion with '!''
+setopt nobanghist
+
 # if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
 #   exec tmux
 # fi
