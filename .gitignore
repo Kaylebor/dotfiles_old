@@ -27,7 +27,6 @@ Temporary Items
 .apdisk
 
 # Project-specific ignores
-.dracula
 .config/nixpkgs/local.nix
 .scripts/zsh/local.zsh
 .scripts/zsh/local.funcs.zsh

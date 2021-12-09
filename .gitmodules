@@ -1,0 +1,18 @@
+[submodule "dracula/iterm"]
+	path = dracula/iterm
+	url = https://github.com/dracula/iterm.git
+[submodule "dracula/sublime"]
+	path = dracula/sublime
+	url = https://github.com/dracula/sublime.git
+[submodule "dracula/telegram"]
+	path = dracula/telegram
+	url = https://github.com/dracula/telegram.git
+[submodule "dracula/terminal-app"]
+	path = dracula/terminal-app
+	url = https://github.com/dracula/terminal-app.git
+[submodule "dracula/xcode"]
+	path = dracula/xcode
+	url = https://github.com/dracula/xcode.git
+[submodule "dracula/zsh"]
+	path = dracula/zsh
+	url = https://github.com/dracula/zsh.git

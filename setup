@@ -137,25 +137,17 @@ fi
   # curl cheat.sh/:bash_completion > /usr/local/share/zsh/site-functions/cht.sh
 # fi
 
-# Installing Dracula ZSH theme
-[[ ! -d $DIR/.dracula ]] && mkdir -p $DIR/.dracula
-if [[ -d $DIR/.dracula/zsh ]]; then
-  git -C $DIR/.dracula/zsh pull
-else
-  git clone https://github.com/dracula/zsh.git $DIR/.dracula/zsh
-fi
-[[ -e $HOME/.oh-my-zsh/themes/dracula.zsh-theme ]] && rm $HOME/.oh-my-zsh/themes/dracula.zsh-theme
-ln -s $DIR/.dracula/zsh/dracula.zsh-theme $HOME/.oh-my-zsh/themes/dracula.zsh-theme
+# Installing Dracula themes
+git submodule init
+git submodule update
 
-# Installing Dracula Sublime theme (for bat)
-if [[ -d $DIR/.dracula/sublime ]]; then
-  git -C $DIR/.dracula/sublime pull
-else
-  git clone https://github.com/dracula/sublime.git $DIR/.dracula/sublime
-fi
-[[ ! -d $HOME/.bat-themes ]] && mkdir -p $HOME/.bat-themes
+# ZSH theme
+[[ -e $HOME/.oh-my-zsh/themes/dracula.zsh-theme ]] && rm $HOME/.oh-my-zsh/themes/dracula.zsh-theme
+ln -s $DIR/dracula/zsh/dracula.zsh-theme $HOME/.oh-my-zsh/themes/dracula.zsh-theme
+
+# Sublime theme (for bat)
 [[ -e $HOME/.bat-themes/Dracula.tmTheme ]] && rm $HOME/.bat-themes/Dracula.tmTheme
-ln -s $DIR/.dracula/sublime/Dracula.tmTheme $HOME/.bat-themes/Dracula.tmTheme
+ln -s $DIR/dracula/sublime/Dracula.tmTheme $HOME/.bat-themes/Dracula.tmTheme
 
 # Cleanup
 unset FILES_TO_LINK
