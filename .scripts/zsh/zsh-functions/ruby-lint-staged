@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+case $1 in
+  fix)
+    git diff --diff-filter AM --name-only --staged | rg '\.rb$' | xargs rubocop -A --disable-pending-cops
+  ;;
+  *)
+    git diff --diff-filter AM --name-only --staged | rg '\.rb$' | xargs rubocop --disable-pending-cops
+  ;;
+esac

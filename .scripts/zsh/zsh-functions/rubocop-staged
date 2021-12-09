@@ -1,3 +1,0 @@
-#!/bin/zsh
-
-git diff --diff-filter AM --name-only --staged | rg '\.rb$' | xargs rubocop -a --disable-pending-cops
