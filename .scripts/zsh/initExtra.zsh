@@ -18,6 +18,10 @@ export $(asdf env java | grep JAVA_HOME)
 for file in $source_files
   [[ -e $file ]] && source $file
 
+if [[ -o interactive && $TERM != "screen" && -a $ITERM_SHELL_INTEGRATION_INSTALLED && -z $INSIDE_EMACS ]]; then
+  source $HOME/.iterm2_shell_integration.zsh
+fi
+
 if [[ -n $(command -v tmuxp) ]]; then
   eval "$(_TMUXP_COMPLETE=source_zsh tmuxp)"
 fi
