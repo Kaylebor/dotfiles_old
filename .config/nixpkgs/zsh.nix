@@ -29,6 +29,9 @@
       ERL_AFLAGS="-kernel shell_history enabled";
       DISABLE_AUTO_TITLE="true";
       TIME_STYLE="long-iso";
+      EDITOR="emacsclient -nw";
+      VISUAL="emacsclient -nw";
+      XDG_CONFIG_HOME="$HOME/.config";
     };
 
     oh-my-zsh = {
@@ -47,7 +50,6 @@
         "rake-fast"
         "npm"
         "rebar"
-        "timer"
         "urltools"
         "web-search"
         "zsh-interactive-cd"
@@ -100,7 +102,6 @@
       }
     ];
 
-    envExtra = "source $HOME/.scripts/zsh/envExtra.zsh";
     initExtra = "source $HOME/.scripts/zsh/initExtra.zsh";
   };
 }

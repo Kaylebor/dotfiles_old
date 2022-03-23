@@ -4,6 +4,6 @@ elixir 1.12.2-otp-24
 nodejs 16.6.1
 python 3.10.0 2.7.18
 erlang 24.0.5
-yarn 1.22.11
+yarn 1.22.17
 rebar 3.16.1
 neovim system

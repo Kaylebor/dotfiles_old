@@ -6,37 +6,6 @@
     aliases = {
       aliases = "config --get-regexp alias";
 
-      s = "status";
-      s-c = "status --column";
-      ss = "status -s";
-      a = "add";
-      a-i = "add -i";
-      c = "commit";
-      c-a = "commit -a";
-      c-m = "commit -m";
-      c-am = "commit -am";
-      c--am = "commit --amend";
-      c-i = "commit --interactive";
-      c-p = "commit -p";
-      b = "branch";
-      bd = "branch -d";
-      bv = "branch -v";
-      bvv = "branch -vv";
-      ba = "branch -a";
-      co = "checkout";
-      cob = "checkout -b";
-      p = "pull";
-      f = "fetch";
-      ps = "push";
-      psf = "push --force-with-lease";
-      psu = "push -u";
-      psuo = "push -u origin HEAD";
-      m = "merge";
-      m-s = "merge --squash";
-      r = "rebase";
-      r-i = "rebase -i";
-      l = "log";
-
       rg = "!git branch -a | sed '/->/d' | sed 's/\\*//' | xargs git grep -n -I";
       hist = "log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short";
       last = "log -1 head";

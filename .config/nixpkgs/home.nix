@@ -3,7 +3,6 @@
     ./git.nix
     ./zsh.nix
     ./neovim.nix
-    ./tmux.nix
     ./local.nix
   ];
   
