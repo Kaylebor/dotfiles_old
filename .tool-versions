@@ -1,9 +1,8 @@
-java temurin-17.0.0+35
-ruby 3.0.2
-elixir 1.12.2-otp-24
-nodejs 16.6.1
-python 3.10.0 2.7.18
-erlang 24.0.5
-yarn 1.22.17
-rebar 3.16.1
-neovim system
+elixir 1.13.2-otp-24
+erlang 24.2.1
+java temurin-18.0.1+10
+lua 5.1.5
+nodejs 18.2.0
+rebar 3.18.0
+ruby 3.1.2
+yarn 1.22.19

@@ -27,6 +27,6 @@ Temporary Items
 .apdisk
 
 # Project-specific ignores
-.config/nixpkgs/local.nix
+.config/git/.local.gitconfig
 .scripts/zsh/local.zsh
 .scripts/zsh/local.funcs.zsh

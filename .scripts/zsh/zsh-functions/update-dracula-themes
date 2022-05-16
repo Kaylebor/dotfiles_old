@@ -1,4 +1,4 @@
 #!/bin/zsh
 
 local dracula_path=$HOME/.dracula
-ls -d -1 $dracula_path/**/ | parallel git -C {} pull
+ls -d -1 $dracula_path/** | parallel git -C {} pull

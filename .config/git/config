@@ -1,0 +1,45 @@
+[alias]
+	aliases = config --get-regexp alias
+	bl-author = !git for-each-ref --sort='-committerdate:iso8601' --format='%(committerdate:relative)|%(refname:short)|%(committername)' refs/heads/ | column -s '|' -t
+	bl-date = for-each-ref --sort='-committerdate:iso8601' --format=' %(committerdate:iso8601)%09%(refname)' refs/heads
+	blr-author = !git for-each-ref --sort='-committerdate:iso8601' --format='%(committerdate:relative)|%(refname:short)|%(committername)' refs/remotes/ | column -s '|' -t
+	blr-date = for-each-ref --sort='-committerdate:iso8601' --format=' %(committerdate:iso8601)%09%(refname)' refs/remotes
+	del-gone = !git list-gone | xargs -r git branch -D
+	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+	last = log -1 head
+	list-gone = !git list-local | awk '$2 == '[gone]' {print $1}'
+	list-local = for-each-ref --format '%(refname:short) %(upstream:track)' refs/heads
+	rg = !git branch -a | sed '/->/d' | sed 's/\\*//' | xargs git grep -n -I
+
+[branch]
+	autosetupmerge = always
+
+[core]
+	autocrlf = input
+	editor = nvim
+	eol = lf
+	excludesfile = ~/.config/git/.gitignore.global
+	pager = /usr/local/opt/git-delta/bin/delta
+
+[difftool]
+	prompt = false
+
+[format]
+	pretty = %C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%>(12,trunc)%ad %C(auto,green)%<(9,trunc)%aN%C(auto,reset)%s%C(auto,red)% gD% D
+
+[interactive]
+	diffFilter = /usr/local/opt/git-delta/bin/delta --color-only
+
+[pull]
+	ff = only
+
+[push]
+	default = simple
+
+[log]
+	date = relative
+
+[include]
+	path = ~/.local.gitconfig
+[github]
+	user = Kaylebor

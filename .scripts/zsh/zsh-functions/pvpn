@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+local vpn_name="Platogo VPN"
+case $1 in
+c|connect)
+  networksetup -connectpppoeservice "$vpn_name"
+  ;;
+d|disconnect)
+  networksetup -disconnectpppoeservice "$vpn_name"
+  ;;
+*) ;;
+esac
