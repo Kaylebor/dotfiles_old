@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+local parent_folder='.'
+if [[ ! -z $1 ]]; then
+    parent_folder=$1
+fi
+fd -td -d1 . $parent_folder --exec git -C {} pull
