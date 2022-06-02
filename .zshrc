@@ -145,6 +145,11 @@ alias lsg=exa --git-ignore
 alias quit=exit
 alias wine=wine64
 alias sed=sed -E
+alias python=python3
+alias pip=pip3
+
+# Making sure this path is first
+path=(.git/safe/../../bin $path)
 
 # Use tmux on certain environments (for multipane support mostly)
 if command -v tmux &> /dev/null \
