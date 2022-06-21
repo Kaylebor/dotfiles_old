@@ -7,7 +7,7 @@
 	del-gone = !git list-gone | xargs -r git branch -D
 	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
 	last = log -1 head
-	list-gone = !git list-local | awk '$2 == '[gone]' {print $1}'
+	list-gone = !git list-local | rg '\\[gone\\]$'
 	list-local = for-each-ref --format '%(refname:short) %(upstream:track)' refs/heads
 	rg = !git branch -a | sed '/->/d' | sed 's/\\*//' | xargs git grep -n -I
 
