@@ -134,6 +134,9 @@ eval $(opam env)
 # fzf integration
 [[ -f $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
 
+# forgit
+source $HOME/projects/github/forgit/forgit.plugin.zsh
+
 # Disable history expansion with '!''
 setopt nobanghist
 

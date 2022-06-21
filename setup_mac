@@ -203,6 +203,12 @@ if [[ ! -d $ZSH_CUSTOM/plugins/zsh-completions ]]; then
     $ZSH_CUSTOM/plugins/zsh-completions
 fi
 
+# Install forgit
+if [[ ! -f $HOME/projects/github/forgit/forgit.plugin.zsh ]]; then
+  git clone https://github.com/wfxr/forgit \
+    $HOME/projects/github/forgit
+fi
+
 # fzf zsh integration
 [[ -f /usr/local/opt/fzf/install && ! -f $HOME/.fzf.zsh ]] && . /usr/local/opt/fzf/install
 
