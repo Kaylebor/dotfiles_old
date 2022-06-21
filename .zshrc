@@ -7,6 +7,7 @@ typeset -U path cdpath fpath manpath
 custom_zsh_functions=$HOME/.scripts/zsh/zsh-functions
 path=(
   $HOME/.bin
+  $HOME/go/bin
   $path
   $HOME/.zsh/plugins/zsh-autosuggestions
   $HOME/.zsh/plugins/fast-syntax-highlighting
@@ -48,7 +49,14 @@ export LC_ALL=en_US.UTF-8
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 export TIME_STYLE=long-iso
+
+# XDG - set defaults as they may not be set
+# See https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+# and https://wiki.archlinux.org/title/XDG_Base_Directory#Support
 export XDG_CONFIG_HOME=$HOME/.config
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_STATE_HOME=$HOME/.local/state
 
 # oh-my-zsh extra settings for plugins
 
