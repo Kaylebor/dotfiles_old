@@ -151,6 +151,9 @@ alias sed=sed -E
 alias python=python3
 alias pip=pip3
 
+# Rubocop server
+rubocop --start-server > /dev/null 2>&1
+
 # Making sure this path is first
 path=(.git/safe/../../bin $path)
 
