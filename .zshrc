@@ -21,7 +21,7 @@ fpath=(
   $HOME/.zsh/plugins/fast-syntax-highlighting
   $HOME/.zsh/plugins/zsh-completions
   $HOME/.zsh/plugins/zsh-autoenv
-  ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+  ${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 )
 
 # Load custom scripts
@@ -70,6 +70,7 @@ plugins=(
   asdf
   command-not-found
   cp
+  direnv
   emacs
   extract
   fd
@@ -128,7 +129,11 @@ export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 gpg-connect-agent updatestartuptty /bye > /dev/null
 
-if [[ -o interactive && $TERM != "screen" && $TERM_PROGRAM = "iTerm.app" && -z $INSIDE_EMACS ]]; then
+if [[ -o interactive \
+  && $TERM != "screen" \
+  && $TERM_PROGRAM =~ '(WarpTerminal|iTerm.app|vscode)' \
+  && -z $INSIDE_EMACS ]]
+then
   source $HOME/.iterm2_shell_integration.zsh
 fi
 
@@ -157,7 +162,7 @@ alias quit=exit
 alias wine=wine64
 alias sed=sed -E
 alias python=python3
-alias pip=pip3
+alias cat='bat --paging=never'
 
 # Rubocop server
 rubocop --start-server > /dev/null 2>&1

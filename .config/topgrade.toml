@@ -8,7 +8,6 @@ disable = [
     "shell",
     "gem",
     "nix",
-    "git",
     "asdf"
 ]
 

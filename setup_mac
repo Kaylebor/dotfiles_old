@@ -13,7 +13,11 @@ FILES_TO_LINK=(
   .config/git/.gitignore.global
   .config/git/config
   .config/nvim/init.vim
+  .config/tg/conf.py
   .config/topgrade.toml
+  .doom.d/config.el
+  .doom.d/init.el
+  .doom.d/packages.el
   .default-gems
   .default-python-packages
   .dracula
@@ -219,6 +223,12 @@ if [[ ! -a $iterm_integration_file ]]; then
   curl -L https://iterm2.com/shell_integration/zsh -o $iterm_integration_file
 fi
 unset iterm_integration_file
+
+# cht.sh
+if [[ ! -f $HOME/.bin/cht.sh ]]; then
+  curl https://cht.sh/:cht.sh > $HOME/.bin/cht.sh
+  chmod +x $HOME/.bin/cht.sh
+fi
 
 LinkDraculaThemes
 

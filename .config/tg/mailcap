@@ -1,0 +1,13 @@
+# media
+video/*; mpv --no-config --vo=tct "%s"
+audio/ogg; mpv --no-config --vo=tct --speed=1.33 "%s"
+audio/mpeg; mpv --no-config --vo=tct --no-video "%s"
+image/*; mpv --no-config --pause --vo=tct "%s"
+
+# text
+text/html; w3m "%s"
+text/html; open -a 'Firefox Developer Edition' "%s"
+text/plain; bat "%s"
+
+# fallback to neovim
+text/*; nvim "%s"
