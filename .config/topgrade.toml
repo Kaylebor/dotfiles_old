@@ -8,11 +8,12 @@ disable = [
     "shell",
     "gem",
     "nix",
-    "asdf"
+    "asdf",
+    "git_repos"
 ]
 
 # Ignore failures for these steps
-#ignore_failures = ["powershell"]
+ignore_failures = ["git_repos"]
 
 # Run specific steps - same options as the command line flag
 #only = ["system", "emacs"]
