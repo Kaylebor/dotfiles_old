@@ -43,6 +43,7 @@ fi
 export BAT_THEME=Dracula
 export DISABLE_AUTO_TITLE=true
 export ERL_AFLAGS=-kernel shell_history enabled
+export KERL_BUILD_DOCS=yes
 export FZF_TMUX=1
 export LANG=C.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -129,14 +130,6 @@ export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 gpg-connect-agent updatestartuptty /bye > /dev/null
 
-if [[ -o interactive \
-  && $TERM != "screen" \
-  && $TERM_PROGRAM =~ '(WarpTerminal|iTerm.app|vscode)' \
-  && -z $INSIDE_EMACS ]]
-then
-  source $HOME/.iterm2_shell_integration.zsh
-fi
-
 if [[ -n $(command -v tmuxp) ]]; then
   eval "$(_TMUXP_COMPLETE=source_zsh tmuxp)"
 fi
@@ -147,8 +140,8 @@ eval $(opam env)
 # fzf integration
 [[ -f $HOME/.fzf.zsh ]] && source $HOME/.fzf.zsh
 
-# forgit
-source $HOME/projects/github/forgit/forgit.plugin.zsh
+# Starship prompt
+eval "$(starship init zsh)"
 
 # Disable history expansion with '!''
 setopt nobanghist
@@ -159,23 +152,7 @@ alias g=git
 alias ls=exa
 alias lsg=exa --git-ignore
 alias quit=exit
-alias wine=wine64
+[[ -n $(command -v wine64) ]] && alias wine=wine64
 alias sed=sed -E
 alias python=python3
 alias cat='bat --paging=never'
-
-# Rubocop server
-rubocop --start-server > /dev/null 2>&1
-
-# Making sure this path is first
-path=(.git/safe/../../bin $path)
-
-# Use tmux on certain environments (for multipane support mostly)
-if command -v tmux &> /dev/null \
-  && [[ -n $PS1 ]] \
-  && [[ -z $TMUX ]] \
-  && [[ ! $TERM =~ "screen|tmux" ]] \
-  && [[ ! $TERM_PROGRAM =~ '(WarpTerminal|iTerm.app|vscode)' ]]
-then
-  exec tmux
-fi

@@ -165,7 +165,7 @@ fi
 LinkLocalZSH
 
 if [[ ! ${SHELL##*/} == zsh ]]; then
-  SHELL=$(brew --prefix zsh)/bin/zsh
+  SHELL=$(command -v zsh)
   [[ ! $(grep "$SHELL" /etc/shells) ]] && echo $SHELL | sudo tee -a /etc/shells
   chsh -s $SHELL $USER
 fi
@@ -205,12 +205,6 @@ fi
 if [[ ! -d $ZSH_CUSTOM/plugins/zsh-completions ]]; then
   git clone https://github.com/zsh-users/zsh-completions \
     $ZSH_CUSTOM/plugins/zsh-completions
-fi
-
-# Install forgit
-if [[ ! -f $HOME/projects/github/forgit/forgit.plugin.zsh ]]; then
-  git clone https://github.com/wfxr/forgit \
-    $HOME/projects/github/forgit
 fi
 
 # fzf zsh integration
