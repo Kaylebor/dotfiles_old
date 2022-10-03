@@ -74,7 +74,7 @@ $container\
 $shell\
 $character"""
 
-command_timeout = 1000
+command_timeout = 600
 
 [character]
 success_symbol = "[➜](bold green) "
