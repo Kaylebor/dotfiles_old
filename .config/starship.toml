@@ -246,6 +246,21 @@ format = '\[[$symbol($version)]($style)\]'
 [scala]
 format = '\[[$symbol($version)]($style)\]'
 
+[shell]
+disabled = true
+bash_indicator = "bash"
+fish_indicator = "🐟"
+zsh_indicator = "zsh"
+powershell_indicator = "psh"
+ion_indicator = "ion"
+elvish_indicator = "esh"
+tcsh_indicator = "tsh"
+xonsh_indicator = "xsh"
+cmd_indicator = "cmd"
+nu_indicator = "nu"
+unkown_indicator = ""
+format = '[$indicator]($style)'
+
 [spack]
 symbol = "🅢 "
 format = '\[[$symbol$environment]($style)\]'
