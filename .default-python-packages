@@ -6,3 +6,4 @@ nose
 pytest
 pyflakes
 pipenv
+neovim
