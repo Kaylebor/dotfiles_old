@@ -261,6 +261,9 @@ nu_indicator = "nu"
 unkown_indicator = ""
 format = '[$indicator]($style)'
 
+[shlvl]
+disabled = false
+
 [spack]
 symbol = "🅢 "
 format = '\[[$symbol$environment]($style)\]'
