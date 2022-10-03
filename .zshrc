@@ -154,5 +154,4 @@ alias lsg=exa --git-ignore
 alias quit=exit
 [[ -n $(command -v wine64) ]] && alias wine=wine64
 alias sed=sed -E
-alias python=python3
 alias cat='bat --paging=never'

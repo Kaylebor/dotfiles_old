@@ -74,6 +74,8 @@ $container\
 $shell\
 $character"""
 
+command_timeout = 1000
+
 [character]
 success_symbol = "[➜](bold green) "
 error_symbol = "[✗](bold red) "
@@ -94,7 +96,7 @@ format = '\[[$symbol($version(-$name))]($style)\]'
 format = '\[[$symbol($version)]($style)\]'
 
 [cmd_duration]
-format = '\[[⏱ $duration]($style)\]'
+format = ' [⏱ $duration]($style)'
 
 [cobol]
 format = '\[[$symbol($version)]($style)\]'
@@ -143,6 +145,8 @@ disabled = true
 
 [git_branch]
 symbol = " "
+truncation_length = 20
+ignore_branches = ['develop']
 format = '\[[$symbol$branch]($style)\]'
 
 [git_status]
@@ -183,7 +187,7 @@ format = '\[[$symbol($version)]($style)\]'
 
 [memory_usage]
 symbol = " "
-format = '\[$symbol[$ram( | $swap)]($style)\]'
+format = '  $symbol[$ram( | $swap)]($style)'
 
 [nim]
 symbol = " "
@@ -256,7 +260,7 @@ format = '\[[$symbol($version)]($style)\]'
 format = '\[[$symbol$workspace]($style)\]'
 
 [time]
-format = '\[[$time]($style)\]'
+format = '  [$time]($style)'
 
 [username]
 format = '\[[$user]($style)\]'

@@ -12,8 +12,7 @@ FILES_TO_LINK=(
   .config/bat/config
   .config/fish/config.fish
   .config/fish/fish_plugins
-  .config/fish/functions/fish_prompt.fish
-  .config/fish/functions/fish_right_prompt.fish
+  .config/fish/functions/emacsc.fish
   .config/git/.gitignore.global
   .config/git/config
   .config/nvim/init.vim
@@ -201,6 +200,9 @@ LinkDraculaThemes
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 nvim -c ':PlugInstall' -c 'call input("Press any key to continue")' -c ':qa'
+
+# Create completions for 1Password CLI
+op completion fish > ~/.config/fish/completions/op.fish
 
 # Create completions from existing man pages
 fish_update_completions
