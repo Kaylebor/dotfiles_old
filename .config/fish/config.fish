@@ -2,6 +2,10 @@
 fish_add_path ~/.bin
 fish_add_path ~/go/bin
 
+# This path addition means that local files in `project/bin` override global path executables
+# It is specially useful when working with Rails projects
+fish_add_path .git/safe/../../bin
+
 # Disable greeting message
 set -U fish_greeting
 

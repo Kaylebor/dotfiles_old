@@ -6,6 +6,7 @@ typeset -U path cdpath fpath manpath
 
 custom_zsh_functions=$HOME/.scripts/zsh/zsh-functions
 path=(
+  .git/safe/../../bin
   $HOME/.bin
   $HOME/go/bin
   $path
