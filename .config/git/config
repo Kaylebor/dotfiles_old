@@ -1,3 +1,5 @@
+[init]
+	defaultBranch = main
 [alias]
 	aliases = config --get-regexp alias
 	bl-author = !git for-each-ref --sort='-committerdate:iso8601' --format='%(committerdate:relative)|%(refname:short)|%(committername)' refs/heads/ | column -s '|' -t
@@ -19,7 +21,7 @@
 	editor = nvim
 	eol = lf
 	excludesfile = ~/.config/git/.gitignore.global
-	pager = /usr/local/opt/git-delta/bin/delta
+	pager = delta
 
 [difftool]
 	prompt = false
@@ -27,8 +29,19 @@
 [format]
 	pretty = %C(auto,yellow)%h%C(auto,magenta)% G? %C(auto,blue)%>(12,trunc)%ad %C(auto,green)%<(9,trunc)%aN%C(auto,reset)%s%C(auto,red)% gD% D
 
+[add.interactive]
+	useBuiltin = false
 [interactive]
-	diffFilter = /usr/local/opt/git-delta/bin/delta --color-only
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	light = false
+	line-numbers = true
+	syntax-theme = Dracula
+
+[diff]
+	colorMoved = default
 
 [pull]
 	ff = only
