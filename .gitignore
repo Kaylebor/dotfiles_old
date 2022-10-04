@@ -30,4 +30,5 @@ Temporary Items
 .config/git/.local.gitconfig
 .scripts/zsh/local.zsh
 .scripts/zsh/local.funcs.zsh
+.scripts/fish/conf.d/local.fish
 .dir-locals.el
