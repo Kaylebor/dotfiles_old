@@ -17,7 +17,7 @@
 	autosetupmerge = always
 
 [core]
-	autocrlf = input
+	autocrlf = false
 	editor = nvim
 	eol = lf
 	excludesfile = ~/.config/git/.gitignore.global
@@ -56,3 +56,5 @@
 	path = ~/.local.gitconfig
 [github]
 	user = Kaylebor
+[fetch]
+	showForcedUpdates = true

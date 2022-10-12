@@ -1,28 +1,33 @@
 #!/bin/zsh
 
-export ZSH=$HOME/.oh-my-zsh
+export ZSH=${ZSH:-$HOME/.oh-my-zsh}
+export ZSH_CUSTOM=${ZSH_CUSTOM:-$ZSH/custom}
+
+# Set asdf variables
+export ASDF_DIR=$HOME/.asdf
+export ASDF_DATA_DIR=$HOME/.asdf_data
 
 typeset -U path cdpath fpath manpath
 
 custom_zsh_functions=$HOME/.scripts/zsh/zsh-functions
 path=(
   .git/safe/../../bin
-  $HOME/.bin
+  $ASDF_DATA_DIR/shims
+  $ASDF_DIR/bin
+  $HOME/bin
   $HOME/go/bin
   $path
-  $HOME/.zsh/plugins/zsh-autosuggestions
-  $HOME/.zsh/plugins/fast-syntax-highlighting
-  $HOME/.zsh/plugins/zsh-completions
-  $HOME/.zsh/plugins/zsh-autoenv
+  $ZSH_CUSTOM/plugins/zsh-autosuggestions
+  $ZSH_CUSTOM/plugins/fast-syntax-highlighting
+  $ZSH_CUSTOM/plugins/zsh-completions
 )
 fpath=(
   $custom_zsh_functions
   $fpath
-  $HOME/.zsh/plugins/zsh-autosuggestions
-  $HOME/.zsh/plugins/fast-syntax-highlighting
-  $HOME/.zsh/plugins/zsh-completions
-  $HOME/.zsh/plugins/zsh-autoenv
-  ${ZSH_CUSTOM:-${ZSH:-$HOME/.oh-my-zsh}/custom}/plugins/zsh-completions/src
+  $ZSH_CUSTOM/plugins/zsh-autosuggestions
+  $ZSH_CUSTOM/plugins/fast-syntax-highlighting
+  $ZSH_CUSTOM/plugins/zsh-completions
+  $ZSH_CUSTOM/plugins/zsh-completions/src
 )
 
 # Load custom scripts
@@ -113,6 +118,7 @@ fi
 local source_files=(
   $HOME/.scripts/zsh/keybindings-fix.zsh
   $HOME/.local.zsh
+  $ASDF_DIR/asdf.sh
 )
 
 for file in $source_files

@@ -3,3 +3,4 @@ rubocop
 pry
 solargraph
 neovim
+bundler

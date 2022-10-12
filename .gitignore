@@ -28,7 +28,7 @@ Temporary Items
 
 # Project-specific ignores
 .config/git/.local.gitconfig
+.config/fish/conf.d/local.fish
 .scripts/zsh/local.zsh
 .scripts/zsh/local.funcs.zsh
-.scripts/fish/conf.d/local.fish
 .dir-locals.el

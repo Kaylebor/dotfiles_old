@@ -1,9 +1,10 @@
-elixir 1.14.0-otp-25
-erlang 25.0.4
-java temurin-18.0.2+101
+elixir 1.14.1-otp-25
+erlang 25.0.2
+java openjdk-18.0.2
 lua 5.1.5
-nodejs 18.9.0
+nodejs 18.10.0
 python 3.10.7
 rebar 3.19.0
 ruby 3.1.2
 yarn 1.22.19
+clojure 1.11.1.1155
