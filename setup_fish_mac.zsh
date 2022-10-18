@@ -11,6 +11,7 @@ FILES_TO_LINK=(
   .config/fish/config.fish
   .config/fish/fish_plugins
   .config/fish/conf.d/mac.fish
+  .config/fish/completions/mix.fish
   .config/fish/functions/emacsc.fish
 )
 
