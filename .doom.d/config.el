@@ -60,4 +60,5 @@
 ;; (after! projectile (setq projectile-project-root-files-bottom-up (remove
 ;;             ".git" projectile-project-root-files-bottom-up)))
 
+(setq-default tab-width 2)
 (setq initial-frame-alist '((top . 1) (left . 1) (width . 120) (height . 40)))
