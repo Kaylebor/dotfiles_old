@@ -15,7 +15,6 @@ if status is-interactive
     alias exa 'exa -h -L2 --icons'
     alias ls exa
     alias lsg 'exa --git-ignore'
-    alias quit exit
     if command -qv wine64
         alias wine wine64
     end
@@ -23,4 +22,5 @@ if status is-interactive
     alias cat 'bat --paging=never'
     alias emacs emacsc
     alias diff delta
+    alias quit exit
 end
