@@ -20,7 +20,7 @@ function MissingOptionError {
 
 function CheckMandatoryValues {
   if [[ -z $git_email ]]; then
-  MissingOptionError git-email
+    MissingOptionError git-email
   fi
   if [[ -z $git_name ]]; then
     MissingOptionError git-name
@@ -31,42 +31,63 @@ function CheckMandatoryValues {
 }
 
 function ConfigureGit {
+  echo "Configuring git with:"
+  echo "email:       $git_email"
+  echo "name:        $git_name"
+  echo "github user: $github_user"
   sed -i "s/#EMAIL/$git_email/g" $HOME/.gitconfig.local
   sed -i "s/#NAME/$git_name/g" $HOME/.gitconfig.local
   sed -i "s/#GITHUB_USER/$github_user/g" $HOME/.gitconfig.local
 }
 
 function InstallBrew {
-  if [[ -z $(command -v xcode-select) ]]; then
-    echo "Brew could not be installed because Xcode is missing"
-    echo "Check Brew homepage for more information:"
-    echo "https://docs.brew.sh/Installation"
-  else
-    xcode-select --install
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    brew bundle $DIR/Brewfile
+  if [[ -z $(command -v brew) ]]; then
+    echo "Homebrew missing, attempting to install..."
+    if [[ -z $(command -v xcode-select) ]]; then
+      echo "Brew could not be installed because Xcode is missing"
+      echo "Check Brew homepage for more information:"
+      echo "https://docs.brew.sh/Installation"
+    else
+      echo "Installing brew..."
+      xcode-select --install
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+      brew bundle $DIR/Brewfile
+    fi
   fi
 }
 
-function ChangeShell {
-  if [[ ! ${SHELL##*/} == $1 ]]; then
-    SHELL=$(command -v $1)
-    [[ ! $(grep "$SHELL" /etc/shells) ]] && echo $SHELL | sudo tee -a /etc/shells
-    chsh -s $SHELL $USER
+function InstallImgcat {
+  if [[ -z $(command -v imgcat) ]]; then
+    echo "Downloading imgcat..."
+    curl -L https://iterm2.com/utilities/imgcat -o $HOME/bin/imgcat
+    chmod +x $HOME/bin/imgcat
   fi
 }
 
 function InstallASDF {
   if [[ ! -d ${ASDF_DIR:=$HOME/.asdf} ]]; then
+    echo "asdf is missing, installing..."
     git clone https://github.com/asdf-vm/asdf.git $ASDF_DIR --branch v0.10.2
     mkdir -p ${ASDF_DATA_DIR:=$HOME/.asdf_shims}
   fi
+  echo "Sourcing asdf..."
   . $ASDF_DIR/asdf.sh
 }
 
 function InstallASDFLanguages {
+  echo "Installing asdf plugins..."
   cat .tool-versions | cut -d' ' -f1 | xargs -I{} asdf plugin-add {}
+  echo "Installing asdf languages..."
   asdf install
+}
+
+function ChangeShell {
+  if [[ ! ${SHELL##*/} == $1 ]]; then
+    SHELL=$(command -v $1)
+    echo "Changing shell to $SHELL..."
+    [[ ! $(grep "$SHELL" /etc/shells) ]] && echo $SHELL | sudo tee -a /etc/shells
+    chsh -s $SHELL $USER
+  fi
 }
 
 function DownloadIterm2ShellIntegration {
@@ -77,8 +98,12 @@ function DownloadIterm2ShellIntegration {
 }
 
 function ConfigureNeovim {
-  sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  vim_plug_file="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim"
+  if [[ ! -f $vim_plug_file ]]; then
+    echo "Plug missing; downloading..."
+    sh -c "curl -fLo $vim_plug_file --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  fi
+  echo "Installing Neovim plugins..."
   nvim -c ':PlugInstall' -c 'call input("Press any key to continue")' -c ':qa'
 }
 
@@ -88,6 +113,7 @@ function Cleanup {
   unset git_email
   unset git_name
   unset asdf_repo
+  unset vim_plug_file
 }
 
 function Finish {

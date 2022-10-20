@@ -13,6 +13,7 @@ FILES_TO_LINK=(
   .config/fish/conf.d/mac.fish
   .config/fish/completions/mix.fish
   .config/fish/functions/emacsc.fish
+  .config/fish/functions/wttr.fish
 )
 
 DIR="$( cd -- "$(dirname "$0")" || exit >/dev/null 2>&1 ; pwd -P )"
@@ -76,6 +77,9 @@ InstallASDF
 InstallASDFLanguages
 
 DownloadIterm2ShellIntegration fish ~/.config/fish/conf.d/iterm2_shell_integration.fish
+
+# Installing other tools
+InstallImgcat
 
 LinkDraculaThemes
 

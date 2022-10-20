@@ -75,6 +75,9 @@ InstallASDFLanguages
 # iTerm2 integration
 DownloadIterm2ShellIntegration zsh ~/.iterm2_shell_integration.zsh
 
+# Installing other tools
+InstallImgcat
+
 LinkDraculaThemes
 LinkDraculaThemesZSH
 
