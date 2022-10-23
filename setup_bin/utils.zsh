@@ -81,6 +81,13 @@ function InstallASDFLanguages {
   asdf install
 }
 
+function InstallCargoPackages {
+  if [[ -z $(command -v rg) ]]; then
+    echo "Ripgrep missing, installing..."
+    cargo install --features 'pcre2' ripgrep
+  fi
+}
+
 function ChangeShell {
   if [[ ! ${SHELL##*/} == $1 ]]; then
     SHELL=$(command -v $1)

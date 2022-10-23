@@ -1,0 +1,37 @@
+ppa:avsm/ppa
+ppa:kelleyk/emacs
+
+install autoconf
+install bat
+install build-essential
+install bzip2
+install cmake
+install delta
+install emacs28
+install fd-find
+install fop
+install fzf
+install git
+install libffi-dev
+install libgl1-mesa-dev
+install libglu1-mesa-dev
+install libncurses-dev
+install libncurses5-dev
+install libpng-dev
+install libreadline-dev
+install libsqlite3-dev
+install libssh-dev
+install libwxgtk-webview3.0-gtk3-dev
+install libwxgtk3.0-gtk3-dev
+install libxml2-utils
+install lzma-dev
+install m4
+install neovim
+install opam
+install openjdk-11-jdk
+install shellcheck
+install sqlite3
+install tk8.6-dev
+install unixodbc-dev
+install xsltproc
+install zsh

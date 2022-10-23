@@ -59,4 +59,7 @@ fisher update
 # Create completions for 1Password CLI
 op completion fish > ~/.config/fish/completions/op.fish
 
+# Link completions for asdf
+ln -s ~/.asdf/completions/asdf.fish ~/.config/fish/completions/asdf.fish
+
 fish_update_completions

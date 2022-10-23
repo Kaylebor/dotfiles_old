@@ -20,6 +20,7 @@ path=(
   $ZSH_CUSTOM/plugins/zsh-autosuggestions
   $ZSH_CUSTOM/plugins/fast-syntax-highlighting
   $ZSH_CUSTOM/plugins/zsh-completions
+  $HOME/.emacs.d/bin
 )
 fpath=(
   $custom_zsh_functions
