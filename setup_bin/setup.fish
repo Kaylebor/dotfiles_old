@@ -1,23 +1,25 @@
+# Installing Fisher and plugins
+if not command -qv fisher
+  curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+end
+fisher update
+
 # Modifying PATH
 fish_add_path ~/bin
 fish_add_path ~/go/bin
 
+# Add mac-specific paths
+if is:mac
+  for package in coreutils inetutils gnu-indent gnu-sed gnu-tar
+    fish_add_path -pm (brew --prefix $package)/libexec/gnubin
+  end
+  for package in gnu-getopt curl wget
+    fish_add_path -pm (brew --prefix $package)/bin
+  end
+end
+
 # Disable greeting message
 set -U fish_greeting
-
-# Environment variables
-set -Ux BAT_THEME Dracula
-set -Ux DISABLE_AUTO_TITLE true
-set -Ux ERL_AFLAGS "-kernel shell_history enabled"
-set -Ux FZF_TMUX 1
-set -Ux LANG C.UTF-8
-set -Ux LC_ALL en_US.UTF-8
-set -Ux MANPAGER "sh -c 'col -bx | bat -l man -p'"
-set -Ux RIPGREP_CONFIG_PATH $HOME/.ripgreprc
-set -Ux TIME_STYLE long-iso
-
-# Set emacs as default editor
-set -Ux EDITOR "emacs -nw"
 
 # XDG - set defaults as they may not be set
 # See https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
@@ -27,18 +29,25 @@ set -Ux XDG_DATA_HOME ~/.local/share
 set -Ux XDG_CACHE_HOME ~/.cache
 set -Ux XDG_STATE_HOME ~/.local/state
 
+# Environment variables
+set -Ux BAT_THEME Dracula
+set -Ux DISABLE_AUTO_TITLE true
+set -Ux ERL_AFLAGS "-kernel shell_history enabled"
+set -Ux FZF_TMUX 1
+set -Ux LANG C.UTF-8
+set -Ux LC_ALL en_US.UTF-8
+set -Ux MANPAGER "sh -c 'col -bx | bat -l man -p'"
+set -Ux RIPGREP_CONFIG_PATH $XDG_CONFIG_HOME/ripgrep/config
+set -Ux TIME_STYLE long-iso
+
+# Set emacs as default editor
+set -Ux EDITOR "emacs -nw"
+
 # Set asdf variables
 set -Ux ASDF_DIR ~/.asdf
 set -Ux ASDF_DATA_DIR ~/.asdf_data
 
 # Custom asdf install, since the wrapper does not work properly on my machine
-fish_add_path -pm /usr/local/opt/coreutils/libexec/gnubin
-fish_add_path -pm /usr/local/opt/curl/bin
-fish_add_path -pm /usr/local/opt/gnu-getopt/bin
-fish_add_path -pm /usr/local/opt/gnu-indent/libexec/gnubin
-fish_add_path -pm /usr/local/opt/gnu-sed/libexec/gnubin
-fish_add_path -pm /usr/local/opt/gnu-tar/libexec/gnubin
-fish_add_path -pm /usr/local/opt/wget/bin
 fish_add_path -pm $ASDF_DIR/bin
 fish_add_path -pm $ASDF_DATA_DIR/shims
 ln -s $ASDF_DIR/lib/asdf.fish ~/.config/fish/functions/asdf.fish
@@ -49,12 +58,6 @@ set fish_user_paths .git/safe/../../bin $fish_user_paths
 
 # Choose Dracula color theme
 fish_config theme choose Dracula
-
-# Installing Fisher and plugins
-if not command -qv fisher
-  curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
-end
-fisher update
 
 # Create completions for 1Password CLI
 op completion fish > ~/.config/fish/completions/op.fish

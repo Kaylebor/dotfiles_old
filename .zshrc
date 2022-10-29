@@ -1,5 +1,13 @@
 #!/bin/zsh
 
+# XDG - set defaults as they may not be set
+# See https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
+# and https://wiki.archlinux.org/title/XDG_Base_Directory#Support
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_STATE_HOME=$HOME/.local/state
+
 export ZSH=${ZSH:-$HOME/.oh-my-zsh}
 export ZSH_CUSTOM=${ZSH_CUSTOM:-$ZSH/custom}
 
@@ -55,16 +63,8 @@ export FZF_TMUX=1
 export LANG=C.UTF-8
 export LC_ALL=en_US.UTF-8
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgrep/config
 export TIME_STYLE=long-iso
-
-# XDG - set defaults as they may not be set
-# See https://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
-# and https://wiki.archlinux.org/title/XDG_Base_Directory#Support
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_DATA_HOME=$HOME/.local/share
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_STATE_HOME=$HOME/.local/state
 
 # oh-my-zsh extra settings for plugins
 

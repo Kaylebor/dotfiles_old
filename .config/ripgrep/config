@@ -1,3 +1,5 @@
+# Default flags
+-P
 # Adding custom types
 --type-add
 properties:*.properties

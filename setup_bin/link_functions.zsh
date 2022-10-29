@@ -2,23 +2,23 @@
 
 COMMON_FILES_TO_LINK=(
   .asdfrc
+  .dracula
+  .scripts
   .tool-versions
   .default-gems
   .default-python-packages
   .default-npm-packages
   .config/bat/config
-  .config/git/config
   .config/git/.gitignore.global
+  .config/git/config
   .config/nvim/init.vim
+  .config/ripgrep/config
+  .config/starship.toml
   .config/tg/conf.py
   .config/topgrade.toml
-  .config/starship.toml
   .doom.d/config.el
   .doom.d/init.el
   .doom.d/packages.el
-  .dracula
-  .ripgreprc
-  .scripts
 )
 
 function LinkFilesFromList {
