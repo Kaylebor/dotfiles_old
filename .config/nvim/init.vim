@@ -17,6 +17,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'vim-ruby/vim-ruby'
 Plug 'elixir-editors/vim-elixir'
 Plug 'pangloss/vim-javascript'
+Plug 'khaveesh/vim-fish-syntax'
 
 call plug#end()
 
