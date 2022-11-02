@@ -59,6 +59,28 @@ set fish_user_paths .git/safe/../../bin $fish_user_paths
 # Choose Dracula color theme
 fish_config theme choose Dracula
 
+# Set some custom aliases
+alias exa 'exa -h -L2 --icons'
+funcsave exa
+alias ls exa
+funcsave ls
+alias lsg 'exa --git-ignore'
+funcsave lsg
+if command -qv wine64
+  alias wine wine64
+  funcsave wine
+end
+alias sed 'sed -E'
+funcsave sed
+alias cat 'bat --paging=never'
+funcsave cat
+alias emacs emacsc
+funcsave emacs
+alias diff delta
+funcsave diff
+alias quit exit
+funcsave quit
+
 # Create completions for 1Password CLI
 op completion fish > ~/.config/fish/completions/op.fish
 
