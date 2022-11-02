@@ -29,15 +29,13 @@ function wttr
   end
 
   # Indicate how many days: 0 (current only), 1 (today), 2 (today + tomorrow)
-  if test -n "$_flag_d"
-    set -f number_days_forecast $_flag_d
-  else if test -n "$_flag_days"
+  if test -n "$_flag_days"
     set -f number_days_forecast $_flag_days
   else
     set -f number_days_forecast 1
   end
 
-  if test -z "$location" -o -n "$_flag_q" -o -n "$_flag_quiet"
+  if test -z "$location" -o -n "$_flag_quiet"
     # No need to show location queried when missing arguments, as it should be current location
     set -f silent_flag Q
   end
