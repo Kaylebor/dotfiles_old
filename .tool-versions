@@ -1,3 +1,5 @@
+clojure 1.11.1.1182
+delta 0.14.0
 elixir 1.14.1-otp-25
 erlang 25.1.1
 java temurin-19.0.1+10
@@ -6,7 +8,5 @@ nodejs 19.0.0
 python 3.10.8
 rebar 3.19.0
 ruby 3.1.2
-yarn 1.22.19
-clojure 1.11.1.1182
-delta 0.14.0
 rust 1.64.0
+yarn 1.22.19

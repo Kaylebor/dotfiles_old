@@ -49,6 +49,9 @@
 [push]
 	default = simple
 
+[fetch]
+    showForcedUpdates = true
+
 [log]
 	date = relative
 
@@ -56,5 +59,3 @@
 	path = ~/.local.gitconfig
 [github]
 	user = Kaylebor
-[fetch]
-	showForcedUpdates = true
