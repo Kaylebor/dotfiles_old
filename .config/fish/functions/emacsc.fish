@@ -1,5 +1,5 @@
 function emacsc --wraps=emacsclient
-    set -l socket_file (lsof -c Emacs | grep unix | tail -n1 | tr -s ' ' | cut -d' ' -f8)
+    set -l socket_file (find-socket Emacs)
     if test -S $socket_file
         emacsclient -nw --socket-name=$socket_file $argv
     else
