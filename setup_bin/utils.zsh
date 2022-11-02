@@ -35,9 +35,10 @@ function ConfigureGit {
   echo "email:       $git_email"
   echo "name:        $git_name"
   echo "github user: $github_user"
-  sed -i "s/#EMAIL/$git_email/g" $HOME/.gitconfig.local
-  sed -i "s/#NAME/$git_name/g" $HOME/.gitconfig.local
-  sed -i "s/#GITHUB_USER/$github_user/g" $HOME/.gitconfig.local
+  cp .config/git/config $HOME/.config/git/config
+  sed -i "s/#NAME/$git_name/g" $HOME/.config/git/config
+  sed -i "s/#EMAIL/$git_email/g" $HOME/.config/git/config
+  sed -i "s/#GITHUB_USER/$github_user/g" $HOME/.config/git/config
 }
 
 function InstallBrew {

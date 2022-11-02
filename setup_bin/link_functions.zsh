@@ -9,8 +9,7 @@ COMMON_FILES_TO_LINK=(
   .default-python-packages
   .default-npm-packages
   .config/bat/config
-  .config/git/.gitignore.global
-  .config/git/config
+  .config/git/gitignore
   .config/nvim/init.vim
   .config/ripgrep/config
   .config/starship.toml

@@ -1,5 +1,6 @@
 [init]
 	defaultBranch = main
+
 [alias]
 	aliases = config --get-regexp alias
 	bl-author = !git for-each-ref --sort='-committerdate:iso8601' --format='%(committerdate:relative)|%(refname:short)|%(committername)' refs/heads/ | column -s '|' -t
@@ -20,7 +21,7 @@
 	autocrlf = false
 	editor = nvim
 	eol = lf
-	excludesfile = ~/.config/git/.gitignore.global
+	excludesfile = ~/.config/git/gitignore
 	pager = delta
 
 [difftool]
@@ -31,6 +32,7 @@
 
 [add.interactive]
 	useBuiltin = false
+
 [interactive]
 	diffFilter = delta --color-only
 
@@ -55,7 +57,9 @@
 [log]
 	date = relative
 
-[include]
-	path = ~/.local.gitconfig
+[user]
+    name = #NAME
+    email = #EMAIL
+
 [github]
-	user = Kaylebor
+	user = #GITHUB_USER
