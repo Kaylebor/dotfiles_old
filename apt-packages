@@ -4,6 +4,7 @@ ppa:kelleyk/emacs
 install autoconf
 install bat
 install build-essential
+install btop
 install bzip2
 install cmake
 install delta
@@ -11,7 +12,9 @@ install emacs28
 install fd-find
 install fop
 install fzf
+install jq
 install git
+install httpie
 install libffi-dev
 install libgl1-mesa-dev
 install libglu1-mesa-dev

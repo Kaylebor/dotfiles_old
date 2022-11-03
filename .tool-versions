@@ -5,7 +5,7 @@ erlang 25.1.1
 java temurin-19.0.1+10
 lua 5.1.5
 nodejs 19.0.0
-python 3.10.8
+python 3.11.0
 rebar 3.19.0
 ruby 3.1.2
 rust 1.64.0

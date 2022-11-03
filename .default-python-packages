@@ -1,5 +1,6 @@
 PyJWT
 black
+jc
 isort
 marisa-trie
 neovim
@@ -10,4 +11,5 @@ pyflakes
 pytest
 requests
 tabulate
+visidata
 yq
