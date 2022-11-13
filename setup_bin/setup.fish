@@ -34,8 +34,7 @@ set -Ux BAT_THEME Dracula
 set -Ux DISABLE_AUTO_TITLE true
 set -Ux ERL_AFLAGS "-kernel shell_history enabled"
 set -Ux FZF_TMUX 1
-set -Ux LANG C.UTF-8
-set -Ux LC_ALL en_US.UTF-8
+set -Ux LC_ALL C
 set -Ux MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -Ux RIPGREP_CONFIG_PATH $XDG_CONFIG_HOME/ripgrep/config
 set -Ux TIME_STYLE long-iso

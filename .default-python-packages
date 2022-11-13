@@ -6,6 +6,7 @@ marisa-trie
 neovim
 nose
 pipenv
+pipreqs
 prompt_toolkit
 pyflakes
 pytest
