@@ -105,6 +105,25 @@ function DownloadIterm2ShellIntegration {
   fi
 }
 
+function DownloadGitIgnoreCLITool {
+  case $1 in
+    fish)
+      printf "function gi\n\tcurl -sL https://www.toptal.com/developers/gitignore/api/\$argv\nend\n" > \
+~/.config/fish/functions/gi.fish
+      ;;
+    zsh)
+      echo "function gi() { curl -sLw "\n" https://www.toptal.com/developers/gitignore/api/\$@ ;}" >> \
+~/.zshrc && source ~/.zshrc
+      ;;
+    bash)
+      echo "function gi() { curl -sL https://www.toptal.com/developers/gitignore/api/\$@ ;}" >> \
+~/.bash_profile && source ~/.bash_profile
+      ;;
+    *)
+      echo "Unkown option"
+  esac
+}
+
 function ConfigureNeovim {
   vim_plug_file="${XDG_DATA_HOME:-$HOME/.local/share}/nvim/site/autoload/plug.vim"
   if [[ ! -f $vim_plug_file ]]; then

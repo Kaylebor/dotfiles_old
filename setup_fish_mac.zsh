@@ -85,6 +85,8 @@ LinkDraculaThemes
 
 ConfigureNeovim
 
+DownloadGitIgnoreCLITool zsh
+
 Cleanup
 
 Finish
