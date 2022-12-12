@@ -4,10 +4,6 @@ if not command -qv fisher
 end
 fisher update
 
-# Modifying PATH
-fish_add_path ~/bin
-fish_add_path ~/go/bin
-
 # Add mac-specific paths
 if is:mac
   for package in coreutils inetutils gnu-indent gnu-sed gnu-tar
@@ -17,6 +13,10 @@ if is:mac
     fish_add_path -pm (brew --prefix $package)/bin
   end
 end
+
+# Modifying PATH
+fish_add_path ~/bin
+fish_add_path ~/go/bin
 
 # Disable greeting message
 set -U fish_greeting

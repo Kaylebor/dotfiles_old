@@ -5,10 +5,13 @@
 disable = [
     "node",
     "shell",
+    "ruby_gems",
     "gem",
     "nix",
     "asdf",
-    "git_repos"
+    "git_repos",
+    "opam",
+    "vagrant"
 ]
 
 # Ignore failures for these steps
