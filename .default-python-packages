@@ -1,6 +1,7 @@
 PyJWT
 black
 jc
+jupyterlab
 isort
 marisa-trie
 neovim
