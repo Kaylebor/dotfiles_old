@@ -58,6 +58,7 @@ source $DIR/setup_bin/utils.zsh
 CheckMandatoryValues
 
 LinkGeneralFiles $FILES_TO_LINK
+LinkMacFiles
 
 LinkGithubConfig
 ConfigureGit

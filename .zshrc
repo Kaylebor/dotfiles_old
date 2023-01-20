@@ -20,8 +20,16 @@ typeset -U path cdpath fpath manpath
 custom_zsh_functions=$HOME/.scripts/zsh/zsh-functions
 path=(
   .git/safe/../../bin
+  $HOME/.scripts/bin
   $ASDF_DATA_DIR/shims
   $ASDF_DIR/bin
+  /usr/local/opt/wget/bin
+  /usr/local/opt/gnu-tar/libexec/gnubin
+  /usr/local/opt/gnu-sed/libexec/gnubin
+  /usr/local/opt/gnu-indent/libexec/gnubin
+  /usr/local/opt/gnu-getopt/bin
+  /usr/local/opt/curl/bin
+  /usr/local/opt/coreutils/libexec/gnubin
   $HOME/bin
   $HOME/go/bin
   $path
@@ -65,6 +73,9 @@ export LC_ALL=en_US.UTF-8
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgrep/config
 export TIME_STYLE=long-iso
+
+export EDITOR="emacs -nw"
+export ALTERNATE_EDITOR="nvim"
 
 # oh-my-zsh extra settings for plugins
 

@@ -24,8 +24,8 @@ function LinkFilesFromList {
   [[ ! -d $HOME/.backups ]] && mkdir -p $HOME/.backups
   for file in ${1[@]}; do
   [[ -h $HOME/$file ]] && rm $HOME/$file
-    [[ -a $HOME/$file ]] && mv $HOME/$file $HOME/.backups/
-    ln -s $DIR/$file $HOME/$file
+  [[ -a $HOME/$file ]] && mv $HOME/$file $HOME/.backups/
+  ln -s $DIR/$file $HOME/$file
   done
   unset file
 }
@@ -33,6 +33,11 @@ function LinkFilesFromList {
 function LinkGeneralFiles {
   LinkFilesFromList $COMMON_FILES_TO_LINK
   LinkFilesFromList $1
+}
+
+function LinkMacFiles {
+  [[ -h $HOME/bin/airport ]] && rm $HOME/bin/airport
+  ln -s /System/Library/PrivateFrameworks/Apple80211.framework/Resources/airport $HOME/bin/airport
 }
 
 function LinkDraculaThemes {

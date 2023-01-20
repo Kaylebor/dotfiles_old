@@ -1,3 +1,6 @@
-function find-socket
-  jc lsof -c $argv[1] | jq -r '.[] | select(.type == "unix").name'
+function find-socket -a QUERY TYPE
+  if test -z "$TYPE"
+      set -f TYPE unix
+  end
+  jc lsof -c $QUERY | jq -r ".[] | select(.type == \"$TYPE\").name"
 end

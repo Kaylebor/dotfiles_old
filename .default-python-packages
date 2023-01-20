@@ -1,8 +1,11 @@
+wheel
 PyJWT
 black
+fire
+gitpython
+isort
 jc
 jupyterlab
-isort
 marisa-trie
 neovim
 nose
@@ -12,6 +15,7 @@ prompt_toolkit
 pyflakes
 pytest
 requests
+ripgrepy
 tabulate
 visidata
 yq

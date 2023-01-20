@@ -21,7 +21,7 @@
 ;; font string. You generally only need these two:
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-(setq doom-font (font-spec :family "Hack Nerd Font" :size 16)
+(setq doom-font (font-spec :family "Hack Nerd Font Mono" :size 16)
       doom-variable-pitch-font (font-spec :family "Hack Nerd Font" :size 16))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
@@ -73,6 +73,7 @@
 ;; (after! projectile (setq projectile-project-root-files-bottom-up (remove
 ;;             ".git" projectile-project-root-files-bottom-up)))
 
+;; Default frame size and position
 (if (display-graphic-p)
     (progn
       (setq initial-frame-alist
@@ -88,4 +89,14 @@
               (left . 80)
               (top . 50)))))
 
+;; Fix broken display in Emacs terminal mode
+(defun set-utf-8-on-frame (frame)
+  (with-selected-frame frame
+    (unless window-system
+      (set-terminal-coding-system 'utf-8))))
+(set-utf-8-on-frame (selected-frame))
+(add-hook! 'after-make-frame-functions 'set-utf-8-on-frame)
+
+;; How many spaces is a tab
 (setq-default tab-width 2)
+(setq-default evil-shift-width 2)

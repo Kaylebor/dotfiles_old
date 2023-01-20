@@ -41,6 +41,7 @@ set -Ux TIME_STYLE long-iso
 
 # Set emacs as default editor
 set -Ux EDITOR "emacs -nw"
+set -Ux ALTERNATE_EDITOR "nvim"
 
 # Set asdf variables
 set -Ux ASDF_DIR ~/.asdf
@@ -50,6 +51,9 @@ set -Ux ASDF_DATA_DIR ~/.asdf_data
 fish_add_path -pm $ASDF_DIR/bin
 fish_add_path -pm $ASDF_DATA_DIR/shims
 ln -s $ASDF_DIR/lib/asdf.fish ~/.config/fish/functions/asdf.fish
+
+# Custom scripts folder
+fish_add_path -pm $HOME/.scripts/bin
 
 # This path addition means that local files in `project/bin` override global path executables
 # It is specially useful when working with Rails projects

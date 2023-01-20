@@ -1,8 +1,10 @@
 function emacsc --wraps=emacsclient
-    set -l socket_file (find-socket Emacs)
-    if test -S $socket_file
-        emacsclient -nw --socket-name=$socket_file $argv
+    set -l socket_file (find-socket Emacs | sort -u)
+    if test -S "$socket_file[1]"
+        emacsclient -nw --socket-name=$socket_file[1] $argv
+    else if test -n "$ALTERNATE_EDITOR"
+        $ALTERNATE_EDITOR $argv
     else
-        printf 'Emacs server not found; please start the server first'
+        printf "Emacs socket missing, and there are no fallbacks, aborting...\n"
     end
 end
