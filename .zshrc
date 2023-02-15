@@ -23,6 +23,7 @@ path=(
   $HOME/.scripts/bin
   $ASDF_DATA_DIR/shims
   $ASDF_DIR/bin
+  $HOME/.local/bin
   /usr/local/opt/wget/bin
   /usr/local/opt/gnu-tar/libexec/gnubin
   /usr/local/opt/gnu-sed/libexec/gnubin

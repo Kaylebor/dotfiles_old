@@ -47,6 +47,9 @@ set -Ux ALTERNATE_EDITOR "nvim"
 set -Ux ASDF_DIR ~/.asdf
 set -Ux ASDF_DATA_DIR ~/.asdf_data
 
+# Some systems add executables on this path
+fish_add_path -pm $HOME/.local/bin
+
 # Custom asdf install, since the wrapper does not work properly on my machine
 fish_add_path -pm $ASDF_DIR/bin
 fish_add_path -pm $ASDF_DATA_DIR/shims

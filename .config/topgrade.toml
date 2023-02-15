@@ -1,16 +1,19 @@
 # Don't ask for confirmations
 #assume_yes = true
 
+display_preamble = false
+
 # Disable specific steps - same options as the command line flag
 disable = [
-    "node",
-    "shell",
-    "ruby_gems",
-    "gem",
-    "nix",
     "asdf",
+    "containers",
+    "gem",
     "git_repos",
+    "helm",
+    "mas",
+    "node",
     "opam",
+    "ruby_gems",
     "vagrant"
 ]
 
@@ -21,7 +24,7 @@ ignore_failures = ["git_repos"]
 #only = ["system", "emacs"]
 
 # Do not ask to retry failed steps (default: false)
-#no_retry = true
+no_retry = true
 
 # Run inside tmux
 #run_in_tmux = true
@@ -42,10 +45,10 @@ ignore_failures = ["git_repos"]
 #set_title = false
 
 # Display the time in step titles
-# display_time = true
+display_time = true
 
 # Cleanup temporary or old files
-#cleanup = true
+cleanup = true
 
 [git]
 #max_concurrency = 5
@@ -71,6 +74,8 @@ ignore_failures = ["git_repos"]
 # Custom commands
 [commands]
 #"Python Environment" = "~/dev/.env/bin/pip install -i https://pypi.python.org/simple -U --upgrade-strategy eager jupyter"
+#"Rubygems" = "gem update --system"
+#"Gems" = "gem update (gem outdated | cut -d ' ' -f 1)"
 
 [brew]
 #greedy_cask = true

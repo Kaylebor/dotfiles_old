@@ -9,6 +9,8 @@ jupyterlab
 marisa-trie
 neovim
 nose
+numpy
+pandas
 pipenv
 pipreqs
 prompt_toolkit

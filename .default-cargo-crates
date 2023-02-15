@@ -1,0 +1,4 @@
+bat --locked
+erldash
+ripgrep --features 'pcre2'
+ripgrep_all --locked
